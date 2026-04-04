@@ -25,7 +25,7 @@
 			<OccurrenceAtTime>true</OccurrenceAtTime>
 			<OccurrenceDate>1772438400000</OccurrenceDate>
 			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[0.1]]></Code>
 				<Unit Class="TimeUnits">WEEK</Unit>
 			</OccurrenceTime>
 			<RecurrenceCode Class="CodeUnitValue">

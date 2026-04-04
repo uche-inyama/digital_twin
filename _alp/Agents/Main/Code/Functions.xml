@@ -5,8 +5,8 @@
 		<ReturnType>double</ReturnType>
 		<Id>1772354473818</Id>
 		<Name><![CDATA[initialiseChain]]></Name>
-		<X>340</X>
-		<Y>300</Y>
+		<X>620</X>
+		<Y>270</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -21,8 +21,8 @@
 		<ReturnType>double</ReturnType>
 		<Id>1772534572250</Id>
 		<Name><![CDATA[calcVariance]]></Name>
-		<X>340</X>
-		<Y>180</Y>
+		<X>620</X>
+		<Y>150</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -41,8 +41,8 @@
 		<ReturnType>double</ReturnType>
 		<Id>1772535083227</Id>
 		<Name><![CDATA[calculateBullwhip]]></Name>
-		<X>340</X>
-		<Y>220</Y>
+		<X>620</X>
+		<Y>190</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

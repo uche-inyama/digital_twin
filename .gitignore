@@ -7,13 +7,23 @@ __pycache__/
 .env
 
 # ── AnyLogic autosave ─────────────────────────────────────────
-SupplyChainDigitalTwin.alp.autosave
+DigitalTwin.alp.autosave
 
 # ── Bridge runtime files ──────────────────────────────────────
-agent/state.json
+agent/state_Distributor.json
+agent/state_Manufacturer.json
+agent/state_Retailer.json
+
 agent/response.json
+agent/state.json
+
+agent/response_Distributor.json
+agent/response_Retailer.json
+agent/response_Manufacturer.json
 
 # ── AnyLogic database (auto-generated, not source code) ───────
 database/db.data
 database/db.lck
 database/db.log
+
+results/

@@ -38,7 +38,17 @@
 				<Alignment>LEFT</Alignment>
 			</Text>
 		</Presentation>
-		<Parameters/>
+		<Parameters>
+			<Parameter>
+				<ParameterName>demandScenario</ParameterName>
+			</Parameter>
+			<Parameter>
+				<ParameterName>autonomyCondition</ParameterName>
+			</Parameter>
+			<Parameter>
+				<ParameterName>replicationNumber</ParameterName>
+			</Parameter>
+		</Parameters>
 		<PresentationProperties>
 			<EnableZoomAndPanning>true</EnableZoomAndPanning>
 			<ExecutionMode>realTimeScaled</ExecutionMode>

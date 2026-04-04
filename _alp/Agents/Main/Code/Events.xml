@@ -3,8 +3,8 @@
 	<Event>
 		<Id>1772354370924</Id>
 		<Name><![CDATA[customerDemand]]></Name>
-		<X>30</X>
-		<Y>530</Y>
+		<X>310</X>
+		<Y>500</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -25,7 +25,7 @@
 			<OccurrenceAtTime>true</OccurrenceAtTime>
 			<OccurrenceDate>1772438400000</OccurrenceDate>
 			<OccurrenceTime Class="CodeUnitValue">
-				<Code><![CDATA[1]]></Code>
+				<Code><![CDATA[5]]></Code>
 				<Unit Class="TimeUnits">WEEK</Unit>
 			</OccurrenceTime>
 			<RecurrenceCode Class="CodeUnitValue">
@@ -35,12 +35,13 @@
 			<Condition>false</Condition>
 		</Properties>
 		<Action xmlns:al="http://anylogic.com"/>
+		<Logging>false</Logging>
 	</Event>
 	<Event>
 		<Id>1772535155690</Id>
 		<Name><![CDATA[endOfRun]]></Name>
-		<X>340</X>
-		<Y>260</Y>
+		<X>620</X>
+		<Y>230</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>

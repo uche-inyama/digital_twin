@@ -1,8 +1,34 @@
 double initialiseChain()
 {/*ALCODESTART::1772354473818*/
+// Initialise inventory
 retailer.inventory      = retailer.initialInventory;
 distributor.inventory   = distributor.initialInventory;
 manufacturer.inventory  = manufacturer.initialInventory;
+
+// Set order up to levels
+retailer.orderUpTo     = 24;
+distributor.orderUpTo  = 24;
+manufacturer.orderUpTo = 24;
+
+// Wire upstream nodes — who to order from
+retailer.upstreamNode     = distributor;
+distributor.upstreamNode  = manufacturer;
+manufacturer.upstreamNode = null;  // Manufacturer has no upstream
+
+// Wire downstream nodes — who to ship to
+retailer.downstreamNode     = null;  // Retailer ships to customer directly
+distributor.downstreamNode  = retailer;
+manufacturer.downstreamNode = distributor;
+
+// Pre-fill pipeline — simulate shipments already in transit at t=0
+retailer.create_deliveryShipment(1, 8.0);
+retailer.create_deliveryShipment(2, 8.0);
+
+distributor.create_deliveryShipment(1, 8.0);
+distributor.create_deliveryShipment(2, 8.0);
+
+manufacturer.create_deliveryShipment(1, 8.0);
+manufacturer.create_deliveryShipment(2, 8.0);
 /*ALCODEEND*/}
 
 double calcVariance(DataSet ds)

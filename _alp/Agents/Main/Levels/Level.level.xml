@@ -3,8 +3,8 @@
 	<Rectangle>
 		<Id>1772360960764</Id>
 		<Name><![CDATA[rectangle]]></Name>
-		<X>120</X>
-		<Y>60</Y>
+		<X>300</X>
+		<Y>30</Y>
 		<Label>
 			<X>10</X>
 			<Y>10</Y>
@@ -20,7 +20,7 @@
 		<LineColor>-16777216</LineColor>
 		<LineMaterial>null</LineMaterial>
 		<LineStyle>SOLID</LineStyle>
-		<Width>170</Width>
+		<Width>180</Width>
 		<Height>110</Height>
 		<Rotation>0.0</Rotation>
 		<FillColor>-4144960</FillColor>
@@ -29,8 +29,8 @@
 	<Rectangle>
 		<Id>1772360987461</Id>
 		<Name><![CDATA[rectangle1]]></Name>
-		<X>120</X>
-		<Y>200</Y>
+		<X>300</X>
+		<Y>160</Y>
 		<Label>
 			<X>10</X>
 			<Y>10</Y>
@@ -55,8 +55,8 @@
 	<Rectangle>
 		<Id>1772360995826</Id>
 		<Name><![CDATA[rectangle2]]></Name>
-		<X>120</X>
-		<Y>330</Y>
+		<X>300</X>
+		<Y>290</Y>
 		<Label>
 			<X>10</X>
 			<Y>10</Y>
@@ -81,8 +81,8 @@
 	<Text>
 		<Id>1772361185624</Id>
 		<Name><![CDATA[retailerDisplay]]></Name>
-		<X>190</X>
-		<Y>60</Y>
+		<X>370</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -112,8 +112,8 @@
 	<Text>
 		<Id>1772361332833</Id>
 		<Name><![CDATA[distributorDisplay]]></Name>
-		<X>190</X>
-		<Y>200</Y>
+		<X>370</X>
+		<Y>170</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -143,8 +143,8 @@
 	<Text>
 		<Id>1772361403603</Id>
 		<Name><![CDATA[manufacturerDisplay]]></Name>
-		<X>190</X>
-		<Y>340</Y>
+		<X>370</X>
+		<Y>310</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -174,7 +174,7 @@
 	<Text>
 		<Id>1772361463110</Id>
 		<Name><![CDATA[text]]></Name>
-		<X>60</X>
+		<X>170</X>
 		<Y>20</Y>
 		<Label>
 			<X>0</X>
@@ -201,7 +201,7 @@
 	<Text>
 		<Id>1772535273171</Id>
 		<Name><![CDATA[text1]]></Name>
-		<X>300</X>
+		<X>580</X>
 		<Y>440</Y>
 		<Label>
 			<X>0</X>
@@ -227,8 +227,8 @@
 	<Text>
 		<Id>1772535277137</Id>
 		<Name><![CDATA[text2]]></Name>
-		<X>300</X>
-		<Y>470</Y>
+		<X>580</X>
+		<Y>480</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -253,8 +253,8 @@
 	<Text>
 		<Id>1772535280087</Id>
 		<Name><![CDATA[text3]]></Name>
-		<X>300</X>
-		<Y>500</Y>
+		<X>580</X>
+		<Y>510</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -279,8 +279,8 @@
 	<Text>
 		<Id>1772535409820</Id>
 		<Name><![CDATA[text4]]></Name>
-		<X>300</X>
-		<Y>540</Y>
+		<X>580</X>
+		<Y>560</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -306,8 +306,8 @@
 	<TimePlot>
 		<Id>1772544329089</Id>
 		<Name><![CDATA[distributorPlot]]></Name>
-		<X>940</X>
-		<Y>10</Y>
+		<X>1250</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -390,8 +390,8 @@
 	<TimePlot>
 		<Id>1772544406813</Id>
 		<Name><![CDATA[manufacturerPlot]]></Name>
-		<X>530</X>
-		<Y>240</Y>
+		<X>840</X>
+		<Y>260</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -474,8 +474,8 @@
 	<TimePlot>
 		<Id>1772544418746</Id>
 		<Name><![CDATA[retailerPlot]]></Name>
-		<X>540</X>
-		<Y>10</Y>
+		<X>850</X>
+		<Y>30</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -558,8 +558,8 @@
 	<BarChart>
 		<Id>1772545800411</Id>
 		<Name><![CDATA[inventoryBarChart]]></Name>
-		<X>550</X>
-		<Y>520</Y>
+		<X>860</X>
+		<Y>540</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -636,8 +636,8 @@
 	<Text>
 		<Id>1772546356777</Id>
 		<Name><![CDATA[text5]]></Name>
-		<X>1000</X>
-		<Y>340</Y>
+		<X>1290</X>
+		<Y>590</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -661,8 +661,8 @@
 	<Text>
 		<Id>1772546360629</Id>
 		<Name><![CDATA[retailerTotalCostField]]></Name>
-		<X>1150</X>
-		<Y>340</Y>
+		<X>1440</X>
+		<Y>590</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -687,8 +687,8 @@
 	<Text>
 		<Id>1772546368878</Id>
 		<Name><![CDATA[text7]]></Name>
-		<X>1000</X>
-		<Y>420</Y>
+		<X>1290</X>
+		<Y>670</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -712,8 +712,8 @@
 	<Text>
 		<Id>1772546372021</Id>
 		<Name><![CDATA[text8]]></Name>
-		<X>1150</X>
-		<Y>420</Y>
+		<X>1440</X>
+		<Y>670</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -738,8 +738,8 @@
 	<Text>
 		<Id>1772546374300</Id>
 		<Name><![CDATA[text9]]></Name>
-		<X>1000</X>
-		<Y>490</Y>
+		<X>1290</X>
+		<Y>740</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -763,8 +763,8 @@
 	<Text>
 		<Id>1772546378470</Id>
 		<Name><![CDATA[text10]]></Name>
-		<X>1150</X>
-		<Y>490</Y>
+		<X>1440</X>
+		<Y>740</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -789,8 +789,8 @@
 	<Text>
 		<Id>1772546597768</Id>
 		<Name><![CDATA[text6]]></Name>
-		<X>1000</X>
-		<Y>540</Y>
+		<X>1290</X>
+		<Y>790</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -814,8 +814,8 @@
 	<Text>
 		<Id>1772546614444</Id>
 		<Name><![CDATA[text11]]></Name>
-		<X>1150</X>
-		<Y>540</Y>
+		<X>1440</X>
+		<Y>790</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -838,4 +838,78 @@
 		</Font>
 		<Alignment>LEFT</Alignment>
 	</Text>
+	<TimePlot>
+		<Id>1772871567449</Id>
+		<Name><![CDATA[demandPlot]]></Name>
+		<X>1290</X>
+		<Y>290</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<AutoUpdate>true</AutoUpdate>
+		<RecurrenceProperties>
+			<Id>1772871567447</Id>
+			<OccurrenceAtTime>true</OccurrenceAtTime>
+			<OccurrenceDate>1772956800000</OccurrenceDate>
+			<OccurrenceTime Class="CodeUnitValue">
+				<Code><![CDATA[0]]></Code>
+				<Unit Class="TimeUnits">WEEK</Unit>
+			</OccurrenceTime>
+			<RecurrenceCode Class="CodeUnitValue">
+				<Code><![CDATA[1]]></Code>
+				<Unit Class="TimeUnits">WEEK</Unit>
+			</RecurrenceCode>
+		</RecurrenceProperties>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Width>340</Width>
+		<Height>210</Height>
+		<BackgroundColor/>
+		<BorderColor/>
+		<ChartArea>
+			<XOffset>50</XOffset>
+			<YOffset>30</YOffset>
+			<Width>260</Width>
+			<Height>120</Height>
+			<BackgroundColor>-1</BackgroundColor>
+			<BorderColor>-16777216</BorderColor>
+			<GridColor>-12566464</GridColor>
+		</ChartArea>
+		<Legend>
+			<Place>SOUTH</Place>
+			<TextColor>-16777216</TextColor>
+			<Size>30</Size>
+		</Legend>
+		<Labels>
+			<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+			<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+			<TextColor>-12566464</TextColor>
+		</Labels>
+		<ShowLegend>true</ShowLegend>
+		<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+		<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+		<VerScaleFromExpression>0</VerScaleFromExpression>
+		<VerScaleToExpression>1</VerScaleToExpression>
+		<VerScaleType>AUTO</VerScaleType>
+		<DrawLine>true</DrawLine>
+		<Interpolation>LINEAR</Interpolation>
+		<DatasetExpression>
+			<Title>Customer Demand</Title>
+			<Id>1772871572325</Id>
+			<Expression>dataset</Expression>
+			<Color>-6632142</Color>
+			<Expression2>retailer.incomingOrder</Expression2>
+			<Expression2Flag>true</Expression2Flag>
+			<PointStyle>NONE</PointStyle>
+			<LineWidth>1.0</LineWidth>
+		</DatasetExpression>
+		<SamplesToKeep>100</SamplesToKeep>
+		<TimeWindowExpression>100</TimeWindowExpression>
+		<FillAreaUnderLine>false</FillAreaUnderLine>
+		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+	</TimePlot>
 </Presentation>
