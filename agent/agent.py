@@ -31,14 +31,37 @@ order_up_to = state["orderUpTo"]
 sim_time    = state["simTime"]
 last_demand = state["lastDemand"]
 lead_time   = state["leadTime"]
+information_sharing  = state["informationSharing"]
+downstream_inventory = state["downstreamInventory"]
+downstream_backlog   = state["downstreamBacklog"]
 
 # ── Build prompt ──────────────────────────────────────────────
-prompt = f"""Inventory manager for {tier} tier.
+if information_sharing:
+    prompt = (
+        "Inventory manager for " + tier + " tier with supply chain visibility.\n"
+        "Week: " + str(int(sim_time)) +
+        " | Inventory: " + str(int(inventory)) +
+        " | Backlog: " + str(int(backlog)) + "\n"
+        "Last demand: " + str(int(last_demand)) +
+        " | Lead time: " + str(lead_time) + " weeks"
+        " | Order-up-to: " + str(order_up_to) + "\n"
+        "Downstream inventory: " + str(int(downstream_inventory)) +
+        " | Downstream backlog: " + str(int(downstream_backlog)) + "\n"
+        "Holding cost: 0.5/unit/week | Backlog cost: 1.0/unit/week\n"
+        "COLLABORATION RULES:\n"
+        "1. If downstream inventory > order-up-to, reduce your order by the excess\n"
+        "2. Order formula: max(0, (order_up_to - inventory) - max(0, downstream_inventory - order_up_to))\n"
+        "3. Smooth orders — avoid overordering\n"
+        "4. Minimise total chain cost\n"
+        "Respond ONLY with this JSON:\n"
+        '{"order_quantity": <0-30>, "confidence": <0.0-1.0>, "reasoning": "<20 words max>"}'
+    )
+else:
+    prompt = f"""Inventory manager for {tier} tier.
 Week: {sim_time:.0f} | Inventory: {inventory:.0f} | Backlog: {backlog:.0f}
 Last demand: {last_demand:.0f} | Lead time: {lead_time} weeks | Order-up-to: {order_up_to}
 Holding cost: 0.5/unit/week | Backlog cost: 1.0/unit/week
 Respond ONLY: {{"order_quantity": <0-30>, "confidence": <0.0-1.0>, "reasoning": "<10 words max>"}}"""
-
 # ── Call Anthropic API ────────────────────────────────────────
 # client = anthropic.Anthropic()  # reads ANTHROPIC_API_KEY from environment
 
