@@ -5,8 +5,9 @@ import sys
 import anthropic
 
 
+client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # ── File paths ────────────────────────────────────────────────
 tier_arg = sys.argv[1] if len(sys.argv) > 1 else "Unknown"
@@ -84,35 +85,27 @@ print(f"Raw response: {response_text}")  # temporary debug line
 import re
 json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
 if json_match:
-    result = json.loads(json_match.group())
+    json_str = json_match.group()
+    try:
+        result = json.loads(json_str)
+        order_qty = max(0, float(result["order_quantity"]))
+        confidence = max(0.0, min(1.0, float(result["confidence"])))
+        reasoning = result.get("reasoning", "")
+    except Exception as e:
+        print(f"ERROR parsing JSON: {e}")
+        print(f"JSON string: {json_str[:200]}")
+        # Fallback
+        inv_position = inventory - backlog
+        order_qty = max(0, order_up_to - inv_position)
+        confidence = 0.0
+        reasoning = f"Parse fallback: {str(e)[:50]}"
 else:
-    raise ValueError(f"No JSON found in response: {response_text}")
-
-try:
-    result = json.loads(response_text)
-    order_qty   = max(0, float(result["order_quantity"]))
-    confidence  = max(0.0, min(1.0, float(result["confidence"])))
-    reasoning   = result.get("reasoning", "")
-except Exception as e:
-    print(f"ERROR calling Claude API: {e}")
+    print(f"No JSON found in response: {response_text[:200]}")
     inv_position = inventory - backlog
-    order_qty    = max(0, order_up_to - inv_position)
-    confidence   = 0.0
-    reasoning    = f"Fallback: {str(e)}"
+    order_qty = max(0, order_up_to - inv_position)
+    confidence = 0.0
+    reasoning = "No JSON in response"
 
-    # write fallback response
-    output = {
-        "order_quantity": order_qty,
-        "confidence":     confidence,
-        "reasoning":      reasoning,
-        "tier":           tier,
-        "sim_time":       sim_time
-    }
-    with open(RESPONSE_FILE, "w") as f:
-        json.dump(output, f)
-
-    print(f"[{tier}] t={sim_time:.1f} -> order={order_qty:.1f} "
-          f"confidence={confidence:.2f} | {reasoning}")
 
 
 # ── Write response for AnyLogic ───────────────────────────────
@@ -124,9 +117,6 @@ output = {
     "sim_time":       sim_time
 }
 
-# Add this debug block
-print(f"ABOUT TO WRITE: {RESPONSE_FILE}")
-print(f"CONTENT: {json.dumps(output, indent=2)}")
 
 with open(RESPONSE_FILE, "w") as f:
     json.dump(output, f)
