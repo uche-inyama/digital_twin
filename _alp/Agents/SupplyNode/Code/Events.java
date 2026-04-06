@@ -47,16 +47,69 @@ if (downstreamNode != null) {
 
 // Step 4: Calculate and place replenishment order upstream
 if (agentEnabled) {
+
+	try {
+        String stateDir = agentScriptPath.replace("agent.py", "");
+        String statePath = stateDir + "state_" + tierName + ".json";
+        
+        String stateJson = "{"
+            + "\"tier\":\"" + tierName + "\","
+            + "\"inventory\":" + inventory + ","
+            + "\"backlog\":" + backlog + ","
+            + "\"orderUpTo\":" + orderUpTo + ","
+            + "\"simTime\":" + time() + ","
+            + "\"lastDemand\":" + lastDemand + ","
+            + "\"leadTime\":" + leadTime + ","
+            + "\"downstreamInventory\":" + downstreamInventory + ","
+            + "\"downstreamBacklog\":" + downstreamBacklog + ","
+            + "\"informationSharing\":" + informationSharing
+            + "}";
+        
+        java.io.FileWriter fw = new java.io.FileWriter(statePath);
+        fw.write(stateJson);
+        fw.close();
+        traceln("[" + tierName + "] Wrote state: inv=" + inventory + " back=" + backlog + " time=" + time());
+    } catch (Exception e) {
+        traceln("[" + tierName + "] Error writing state: " + e.getMessage());
+    }
     outgoingOrder = callLLMAgent();
     outgoingOrder = Math.min(outgoingOrder, 24.0);
 
-   if (agentConfidence < 0.7) {
+   if (agentConfidence < 0.85) {
         double inventoryPosition = inventory - backlog;
        outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
         outgoingOrder = Math.min(outgoingOrder, 24.0);
       traceln("[" + tierName + "] LOW CONFIDENCE (" + agentConfidence +
                ") — reverting to rule-based order: " + outgoingOrder);
    }
+   
+   // HITL — pause for human review if enabled
+   boolean crisisDetected = (backlog > main.crisisBacklogThreshold && inventory == 0);
+    if (hitlEnabled && (agentConfidence < 0.85 || crisisDetected)) {
+        pendingOrder        = outgoingOrder;
+        awaitingHumanInput  = true;
+
+        // Pass state to Main dashboard
+        main.hitlTierName      = tierName;
+        main.hitlInventory     = inventory;
+        main.hitlBacklog       = backlog;
+        main.hitlSuggestedOrder = outgoingOrder;
+        main.hitlConfidence    = agentConfidence;
+        main.hitlReasoning     = agentReasoning;
+        main.hitlWeek          = time();
+        main.hitlHumanOrder    = outgoingOrder;
+        main.humanDecisionAccept = false;
+
+        traceln("[HITL] Pausing at " + tierName +
+        " | week=" + (int)time() +
+        " | confidence=" + agentConfidence +
+        " | crisis=" + crisisDetected +
+        " | suggested=" + outgoingOrder);
+
+        // Pause simulation — human must respond via dashboard
+        getEngine().pause();
+        return; // order placed by resumeFromHITL()
+    }
 
 } else {
     double inventoryPosition = inventory - backlog;

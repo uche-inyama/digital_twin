@@ -21,8 +21,8 @@
 		<InspectionWindowColorTheme>DEFAULT</InspectionWindowColorTheme>
 		<Frame>
 			<Id>1772350491140</Id>
-			<Width>1680</Width>
-			<Height>870</Height>
+			<Width>1880</Width>
+			<Height>1010</Height>
 		</Frame>
 		<Database>
 			<Id>1772350491139</Id>
@@ -72,6 +72,14 @@
 			<VersionMinor>0</VersionMinor>
 			<VersionBuild>5</VersionBuild>
 		</RequiredLibraryReference>
+		<ClassPathEntry>
+			<ResourceReference>
+				<PackageName>supplychaindigitaltwin</PackageName>
+				<ClassName>py4j0.10.7.jar</ClassName>
+			</ResourceReference>
+			<Imported>true</Imported>
+			<Folder>false</Folder>
+		</ClassPathEntry>
 	</Model>
 	<ConvertersApplied>
 		<Uuid>9f7858c9-b2c8-4ead-9244-fd08833f642b</Uuid>

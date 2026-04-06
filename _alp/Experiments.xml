@@ -48,6 +48,9 @@
 			<Parameter>
 				<ParameterName>replicationNumber</ParameterName>
 			</Parameter>
+			<Parameter>
+				<ParameterName>crisisBacklogThreshold</ParameterName>
+			</Parameter>
 		</Parameters>
 		<PresentationProperties>
 			<EnableZoomAndPanning>true</EnableZoomAndPanning>

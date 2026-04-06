@@ -2,7 +2,12 @@
 <ActiveObjectClass>
 	<Id>1772350491142</Id>
 	<Name><![CDATA[Main]]></Name>
-	<StartupCode><![CDATA[initialiseChain();]]></StartupCode>
+	<AdditionalClassCode xmlns:al="http://anylogic.com"/>
+	<Import><![CDATA[import py4j.GatewayServer;]]></Import>
+	<StartupCode><![CDATA[GatewayServer gatewayServer = new GatewayServer(this);
+gatewayServer.start();
+traceln("GatewayServer started for RL connection");
+initialiseChain();]]></StartupCode>
 	<Generic>false</Generic>
 	<GenericParameter>
 		<Id>1772350491147</Id>
@@ -101,8 +106,8 @@
 		<DataSet>
 			<Id>1772534346777</Id>
 			<Name><![CDATA[customerDemandData]]></Name>
-			<X>310</X>
-			<Y>460</Y>
+			<X>20</X>
+			<Y>440</Y>
 			<Label>
 				<X>15</X>
 				<Y>0</Y>

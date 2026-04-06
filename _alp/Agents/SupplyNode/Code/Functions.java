@@ -32,29 +32,10 @@ double callLLMAgent()
 {/*ALCODESTART::1772751311292*/
 // ── Write state.json for Python ───────────────────────────
 String stateDir     = agentScriptPath.replace("agent.py", "");
-String statePath    = stateDir + "state_"    + tierName + ".json";
 String responsePath = stateDir + "response_" + tierName + ".json";
 
-String stateJson = "{"
-    + "\"tier\":\"" + tierName + "\","
-    + "\"inventory\":" + inventory + ","
-    + "\"backlog\":" + backlog + ","
-    + "\"orderUpTo\":" + orderUpTo + ","
-    + "\"simTime\":" + time() + ","
-    + "\"lastDemand\":" + lastDemand + ","
-    + "\"leadTime\":" + leadTime + ","
-    + "\"downstreamInventory\":" + downstreamInventory + ","
-    + "\"downstreamBacklog\":" + downstreamBacklog + ","
-    + "\"informationSharing\":" + informationSharing
-    + "}";
-
 try {
-    // Write state file
-    java.io.FileWriter fw = new java.io.FileWriter(statePath);
-    fw.write(stateJson);
-    fw.close();
-
-    // Call Python script
+    // Call Python script FIRST (without writing state)
     ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath, tierName);
     pb.redirectErrorStream(true);
     Process process = pb.start();
@@ -137,6 +118,134 @@ try {
     return json.substring(start, end);
 } catch (Exception e) {
     return "";
+}
+/*ALCODEEND*/}
+
+double callRLAgent()
+{/*ALCODESTART::1775404722808*/
+// ── callRLAgent() — Add this function to SupplyNode
+// ───────────────────────
+// Called from orderCycle when autonomyCondition == 4
+
+// Delete prev files at start of new episode
+
+// ── Write tier-specific state file for RL agent
+// ───────────────────────────
+String stateDir = agentScriptPath.replace("agent.py", "");
+String rlStatePath = stateDir + "state_rl_" + tierName
+		+ ".json";
+String rlRespPath = stateDir + "response_rl_" + tierName
+		+ ".json";
+String rlLogPath = stateDir + "log_rl_" + tierName + ".txt";
+
+if (time() < 1.0) {
+	new java.io.File(
+			stateDir + "prev_rl_" + tierName + ".json")
+			.delete();
+}
+
+// Get system-wide state for SGA
+Main main = (Main) getOwner();
+double systemTotalBacklog = main.retailer.backlog
+		+ main.distributor.backlog
+		+ main.manufacturer.backlog;
+double systemTotalInventory = main.retailer.inventory
+		+ main.distributor.inventory
+		+ main.manufacturer.inventory;
+double totalShipped = main.retailer.totalShipped
+		+ main.distributor.totalShipped
+		+ main.manufacturer.totalShipped;
+double totalReceived = main.retailer.totalReceived
+		+ main.distributor.totalReceived
+		+ main.manufacturer.totalReceived;
+double systemSL = totalReceived > 0
+		? totalShipped / totalReceived
+		: 1.0;
+
+String rlStateJson = String.format(
+		"{\"tier\":\"%s\",\"inventory\":%.2f,\"backlog\":%.2f,"
+				+ "\"lastDemand\":%.2f,\"leadTime\":%d,\"orderUpTo\":%d,"
+				+ "\"simTime\":%.2f,"
+				+ "\"downstreamInventory\":%.2f,\"downstreamBacklog\":%.2f,"
+				+ "\"systemTotalBacklog\":%.2f,\"systemTotalInventory\":%.2f,"
+				+ "\"systemServiceLevel\":%.4f,\"shippedLast\":%.2f}",
+		tierName, inventory, backlog, lastDemand, leadTime,
+		orderUpTo, time(), downstreamInventory,
+		downstreamBacklog, systemTotalBacklog,
+		systemTotalInventory, systemSL, shipped);
+
+try {
+	// Write RL state file
+	java.io.FileWriter fw = new java.io.FileWriter(
+			rlStatePath);
+	fw.write(rlStateJson);
+	fw.close();
+
+	// Call RL agent script
+	ProcessBuilder pb = new ProcessBuilder("python",
+			agentScriptPath.replace("agent.py",
+					"train_offline.py"),
+			tierName);
+	pb.redirectOutput(new java.io.File(rlLogPath));
+	pb.redirectErrorStream(true);
+	Process process = pb.start();
+
+	boolean finished = process.waitFor(30,
+			java.util.concurrent.TimeUnit.SECONDS);
+
+	if (!finished) {
+		traceln("[" + tierName
+				+ "] RL agent timed out — rule-based fallback");
+		process.destroyForcibly();
+		double ip = inventory - backlog;
+		return Math.max(0, orderUpTo - ip);
+	}
+
+	// Read log
+	try {
+		java.nio.file.Path lp = java.nio.file.Paths
+				.get(rlLogPath);
+		String logContent = new String(
+				java.nio.file.Files.readAllBytes(lp));
+		if (logContent.trim().length() > 0) {
+			traceln("[" + tierName + "] "
+					+ logContent.trim());
+		}
+	} catch (Exception logEx) {
+		/* not critical */ }
+
+	// Check response file
+	if (!new java.io.File(rlRespPath).exists()) {
+		traceln("[" + tierName
+				+ "] RL response not found — rule-based fallback");
+		double ip = inventory - backlog;
+		return Math.max(0, orderUpTo - ip);
+	}
+
+	// Read response
+	java.nio.file.Path rp = java.nio.file.Paths
+			.get(rlRespPath);
+	String responseJson = new String(
+			java.nio.file.Files.readAllBytes(rp));
+
+	agentConfidence = parseJsonDouble(responseJson,
+			"confidence");
+	agentReasoning = parseJsonString(responseJson,
+			"reasoning");
+	double orderQty = parseJsonDouble(responseJson,
+			"order_quantity");
+
+	traceln("[" + tierName + "] t=" + time()
+			+ " -> RL order=" + orderQty + " confidence="
+			+ agentConfidence + " | " + agentReasoning);
+
+	return Math.max(0, orderQty);
+
+} catch (Exception e) {
+	traceln("[" + tierName + "] ERROR calling RL agent: "
+			+ e.getMessage());
+	double ip = inventory - backlog;
+	return Math.max(0, orderUpTo - ip);
 }
 /*ALCODEEND*/}
 

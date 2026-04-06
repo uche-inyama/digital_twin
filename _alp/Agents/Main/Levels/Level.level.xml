@@ -3,8 +3,8 @@
 	<Rectangle>
 		<Id>1772360960764</Id>
 		<Name><![CDATA[rectangle]]></Name>
-		<X>300</X>
-		<Y>30</Y>
+		<X>140</X>
+		<Y>40</Y>
 		<Label>
 			<X>10</X>
 			<Y>10</Y>
@@ -29,7 +29,7 @@
 	<Rectangle>
 		<Id>1772360987461</Id>
 		<Name><![CDATA[rectangle1]]></Name>
-		<X>300</X>
+		<X>140</X>
 		<Y>160</Y>
 		<Label>
 			<X>10</X>
@@ -55,7 +55,7 @@
 	<Rectangle>
 		<Id>1772360995826</Id>
 		<Name><![CDATA[rectangle2]]></Name>
-		<X>300</X>
+		<X>140</X>
 		<Y>290</Y>
 		<Label>
 			<X>10</X>
@@ -81,8 +81,8 @@
 	<Text>
 		<Id>1772361185624</Id>
 		<Name><![CDATA[retailerDisplay]]></Name>
-		<X>370</X>
-		<Y>30</Y>
+		<X>220</X>
+		<Y>40</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -112,7 +112,7 @@
 	<Text>
 		<Id>1772361332833</Id>
 		<Name><![CDATA[distributorDisplay]]></Name>
-		<X>370</X>
+		<X>210</X>
 		<Y>170</Y>
 		<Label>
 			<X>0</X>
@@ -143,8 +143,8 @@
 	<Text>
 		<Id>1772361403603</Id>
 		<Name><![CDATA[manufacturerDisplay]]></Name>
-		<X>370</X>
-		<Y>310</Y>
+		<X>210</X>
+		<Y>300</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -174,7 +174,7 @@
 	<Text>
 		<Id>1772361463110</Id>
 		<Name><![CDATA[text]]></Name>
-		<X>170</X>
+		<X>50</X>
 		<Y>20</Y>
 		<Label>
 			<X>0</X>
@@ -201,7 +201,7 @@
 	<Text>
 		<Id>1772535273171</Id>
 		<Name><![CDATA[text1]]></Name>
-		<X>580</X>
+		<X>650</X>
 		<Y>440</Y>
 		<Label>
 			<X>0</X>
@@ -227,8 +227,8 @@
 	<Text>
 		<Id>1772535277137</Id>
 		<Name><![CDATA[text2]]></Name>
-		<X>580</X>
-		<Y>480</Y>
+		<X>650</X>
+		<Y>490</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -253,8 +253,8 @@
 	<Text>
 		<Id>1772535280087</Id>
 		<Name><![CDATA[text3]]></Name>
-		<X>580</X>
-		<Y>510</Y>
+		<X>650</X>
+		<Y>540</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -279,8 +279,8 @@
 	<Text>
 		<Id>1772535409820</Id>
 		<Name><![CDATA[text4]]></Name>
-		<X>580</X>
-		<Y>560</Y>
+		<X>650</X>
+		<Y>590</Y>
 		<Label>
 			<X>0</X>
 			<Y>-10</Y>
@@ -912,4 +912,173 @@
 		<FillAreaUnderLine>false</FillAreaUnderLine>
 		<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
 	</TimePlot>
+	<Text>
+		<Id>1775365019091</Id>
+		<Name><![CDATA[text12]]></Name>
+		<X>350</X>
+		<Y>410</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text><![CDATA["HUMAN REVIEW REQUIRED"]]></Text>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>10</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Text>
+		<Id>1775365043712</Id>
+		<Name><![CDATA[text13]]></Name>
+		<X>350</X>
+		<Y>490</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text/>
+		<TextCode>"Tier: " + hitlTierName + "\n" +
+"Week: " + (int)hitlWeek + "\n" +
+"Inventory: " + (int)hitlInventory + "\n" +
+"Backlog: " + (int)hitlBacklog + "\n" +
+"LLM Suggests: " + (int)hitlSuggestedOrder + "\n" +
+"Confidence: " + hitlConfidence + "\n" +
+"Reasoning: " + hitlReasoning</TextCode>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>10</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
+	<Control Type="EditBox">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1775365604762</Id>
+		<Name><![CDATA[editbox]]></Name>
+		<X>370</X>
+		<Y>670</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="100" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<FillColor>-1</FillColor>
+			<TextColor>-16777216</TextColor>
+			<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+			<Enabled>true</Enabled>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="11" Style="0"/>
+			<LinkTo>true</LinkTo>
+			<Link>hitlHumanOrder</Link>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1775365754440</Id>
+		<Name><![CDATA[button]]></Name>
+		<X>300</X>
+		<Y>720</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="100" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+			<Enabled>true</Enabled>
+			<ActionCode>humanDecisionAccept = true;
+resumeFromHITL();</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="11" Style="0"/>
+			<LabelText>Accept</LabelText>
+		</ExtendedProperties>
+	</Control>
+	<Control Type="Button">
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Id>1775365759755</Id>
+		<Name><![CDATA[button1]]></Name>
+		<X>450</X>
+		<Y>720</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+		<BasicProperties Width="100" Height="30">
+			<EmbeddedIcon>false</EmbeddedIcon>
+			<TextColor>-16777216</TextColor>
+			<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+			<Enabled>true</Enabled>
+			<ActionCode>humanDecisionAccept = false;
+resumeFromHITL();</ActionCode>
+		</BasicProperties>
+		<ExtendedProperties>
+			<Font Name="Dialog" Size="11" Style="0"/>
+			<LabelText>Override</LabelText>
+		</ExtendedProperties>
+	</Control>
+	<Text>
+		<Id>1775366396447</Id>
+		<Name><![CDATA[text20]]></Name>
+		<X>350</X>
+		<Y>450</Y>
+		<Label>
+			<X>0</X>
+			<Y>-10</Y>
+		</Label>
+		<PublicFlag>true</PublicFlag>
+		<PresentationFlag>true</PresentationFlag>
+		<ShowLabel>false</ShowLabel>
+		<DrawMode>SHAPE_DRAW_2D</DrawMode>
+		<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+		<EmbeddedIcon>false</EmbeddedIcon>
+		<Z>0</Z>
+		<Rotation>0.0</Rotation>
+		<Color>-16777216</Color>
+		<Text/>
+		<TextCode>"Crisis: " + (manufacturer.backlog &gt; 20 &amp;&amp; manufacturer.inventory == 0 ? "YES" : 
+              distributor.backlog &gt; 20 &amp;&amp; distributor.inventory == 0 ? "YES" :
+              retailer.backlog &gt; 20 &amp;&amp; retailer.inventory == 0 ? "YES" : "NO")</TextCode>
+		<Font>
+			<Name><![CDATA[SansSerif]]></Name>
+			<Size>10</Size>
+			<Style>0</Style>
+		</Font>
+		<Alignment>LEFT</Alignment>
+	</Text>
 </Presentation>
