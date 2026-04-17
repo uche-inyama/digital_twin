@@ -3,7 +3,7 @@
 	<EmbeddedObject>
 		<Id>1772353749704</Id>
 		<Name><![CDATA[retailer]]></Name>
-		<X>20</X>
+		<X>30</X>
 		<Y>90</Y>
 		<Label>
 			<X>10</X>
@@ -51,6 +51,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
+				<Value Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
@@ -63,6 +66,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[hitlEnabled]]></Name>
+			</Parameter>
+			<Parameter>
+				<Name><![CDATA[rlEnabled]]></Name>
 			</Parameter>
 		</Parameters>
 		<ReplicationFlag>false</ReplicationFlag>
@@ -92,8 +98,8 @@
 	<EmbeddedObject>
 		<Id>1772353781087</Id>
 		<Name><![CDATA[distributor]]></Name>
-		<X>20</X>
-		<Y>190</Y>
+		<X>30</X>
+		<Y>200</Y>
 		<Label>
 			<X>10</X>
 			<Y>0</Y>
@@ -128,6 +134,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[orderUpTo]]></Name>
+				<Value Class="CodeValue">
+					<Code><![CDATA[40]]></Code>
+				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[upstreamNode]]></Name>
@@ -143,6 +152,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
+				<Value Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
@@ -155,6 +167,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[hitlEnabled]]></Name>
+			</Parameter>
+			<Parameter>
+				<Name><![CDATA[rlEnabled]]></Name>
 			</Parameter>
 		</Parameters>
 		<ReplicationFlag>false</ReplicationFlag>
@@ -184,7 +199,7 @@
 	<EmbeddedObject>
 		<Id>1772353801819</Id>
 		<Name><![CDATA[manufacturer]]></Name>
-		<X>20</X>
+		<X>30</X>
 		<Y>340</Y>
 		<Label>
 			<X>10</X>
@@ -220,6 +235,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[orderUpTo]]></Name>
+				<Value Class="CodeValue">
+					<Code><![CDATA[50]]></Code>
+				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[upstreamNode]]></Name>
@@ -232,6 +250,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
+				<Value Class="CodeValue">
+					<Code><![CDATA[true]]></Code>
+				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
@@ -244,6 +265,9 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[hitlEnabled]]></Name>
+			</Parameter>
+			<Parameter>
+				<Name><![CDATA[rlEnabled]]></Name>
 			</Parameter>
 		</Parameters>
 		<ReplicationFlag>false</ReplicationFlag>

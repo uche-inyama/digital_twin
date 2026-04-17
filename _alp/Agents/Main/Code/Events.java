@@ -40,7 +40,7 @@ traceln("Total Cost:        " + (retailer.totalCost + distributor.totalCost + ma
 traceln("==========================");
 
 // ── File paths ──
-String folder = "C:/Users/okech/Models/SupplyChainDigitalTwin/results/";
+String folder = "C:/Users/okech/Models/DigitalTwin/results/";
 String summaryFile = folder + "summary_results.csv";
 String tsFile = folder + "timeseries_A" + autonomyCondition +
                 "_S" + demandScenario +

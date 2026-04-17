@@ -46,9 +46,11 @@ if (downstreamNode != null) {
 }
 
 // Step 4: Calculate and place replenishment order upstream
+
+// Step 4: Calculate and place replenishment order upstream
 if (agentEnabled) {
 
-	try {
+    try {
         String stateDir = agentScriptPath.replace("agent.py", "");
         String statePath = stateDir + "state_" + tierName + ".json";
         
@@ -72,24 +74,58 @@ if (agentEnabled) {
     } catch (Exception e) {
         traceln("[" + tierName + "] Error writing state: " + e.getMessage());
     }
-    outgoingOrder = callLLMAgent();
-    outgoingOrder = Math.min(outgoingOrder, 24.0);
-
-   if (agentConfidence < 0.85) {
-        double inventoryPosition = inventory - backlog;
-       outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
-        outgoingOrder = Math.min(outgoingOrder, 24.0);
-      traceln("[" + tierName + "] LOW CONFIDENCE (" + agentConfidence +
-               ") — reverting to rule-based order: " + outgoingOrder);
-   }
-   
-   // HITL — pause for human review if enabled
-   boolean crisisDetected = (backlog > main.crisisBacklogThreshold && inventory == 0);
+    
+   // ========== HYBRID MODE ==========
+	if (rlEnabled) {
+	    double rlOrder = 0;
+	    double rlConfidence = 0;
+	    String rlReasoning = "";
+	
+	    try {
+	        rlOrder      = callRLAgent();
+	        rlConfidence = agentConfidence;
+	        rlReasoning  = agentReasoning;
+	        traceln("[" + tierName + "] RL DECIDES: order=" + rlOrder +
+	                " conf=" + rlConfidence);
+	    } catch (Exception e) {
+	        traceln("[" + tierName + "] RL not available: " + e.getMessage());
+	        rlOrder = Math.max(0, orderUpTo - (inventory - backlog));
+	    }
+	
+	    // RL order capped at tier-specific orderUpTo
+	    outgoingOrder = Math.min(rlOrder, orderUpTo);
+	
+	    // LLM provides reasoning only
+	    try {
+	        callLLMAgent(rlOrder, rlReasoning, rlConfidence);
+	        traceln("[" + tierName + "] LLM EXPLAINS: " + agentReasoning);
+	    } catch (Exception e) {
+	        traceln("[" + tierName + "] LLM explanation unavailable: " + e.getMessage());
+	    }
+	
+	} else {
+	    // LLM only (A2/A3)
+	    outgoingOrder = callLLMAgent(0, "", 0);
+	    outgoingOrder = Math.min(outgoingOrder, orderUpTo);
+	}
+	// ========== END HYBRID MODE ==========
+	
+	// Remove the low confidence fallback entirely for A4
+	// Keep only for A2/A3 (non-RL)
+	if (!rlEnabled && agentConfidence < 0.70) {
+	    double inventoryPosition = inventory - backlog;
+	    outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
+	    outgoingOrder = Math.min(outgoingOrder, orderUpTo);
+	    traceln("[" + tierName + "] LOW CONFIDENCE (" + agentConfidence +
+	            ") — rule-based fallback: " + outgoingOrder);
+	}
+    
+    // HITL — pause for human review if enabled
+    boolean crisisDetected = (backlog > main.crisisBacklogThreshold && inventory == 0);
     if (hitlEnabled && (agentConfidence < 0.85 || crisisDetected)) {
         pendingOrder        = outgoingOrder;
         awaitingHumanInput  = true;
 
-        // Pass state to Main dashboard
         main.hitlTierName      = tierName;
         main.hitlInventory     = inventory;
         main.hitlBacklog       = backlog;
@@ -101,20 +137,40 @@ if (agentEnabled) {
         main.humanDecisionAccept = false;
 
         traceln("[HITL] Pausing at " + tierName +
-        " | week=" + (int)time() +
-        " | confidence=" + agentConfidence +
-        " | crisis=" + crisisDetected +
-        " | suggested=" + outgoingOrder);
-
-        // Pause simulation — human must respond via dashboard
+                " | week=" + (int)time() +
+                " | confidence=" + agentConfidence +
+                " | crisis=" + crisisDetected +
+                " | suggested=" + outgoingOrder);
+                
+		main.humanDecisionAccept = false;
         getEngine().pause();
-        return; // order placed by resumeFromHITL()
+        return;
     }
 
 } else {
-    double inventoryPosition = inventory - backlog;
-    outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
-    outgoingOrder = Math.min(outgoingOrder, 24.0);
+    // Step 3.5: Apply information sharing to rule-based order
+   if (!agentEnabled && informationSharing && downstreamNode != null) {
+        // NEW LOGIC: Backlog is PRIORITY
+        double excess = Math.max(0, downstreamInventory - orderUpTo);
+        double baseOrder = Math.max(0, orderUpTo - inventory);
+        
+        // Order = MAX(backlog, baseOrder - excess)
+        outgoingOrder = Math.max(backlog, baseOrder - excess);
+        outgoingOrder = Math.min(outgoingOrder, orderUpTo);
+        
+        traceln("[" + tierName + "] NEW Info Sharing: inv=" + inventory 
+                + " back=" + backlog
+                + " downInv=" + downstreamInventory
+                + " excess=" + excess
+                + " baseOrder=" + baseOrder
+                + " order=" + outgoingOrder);
+        
+    } else if (!agentEnabled) {
+        // Original rule-based (no information sharing)
+        double inventoryPosition = inventory - backlog;
+        outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
+        outgoingOrder = Math.min(outgoingOrder, orderUpTo);
+    }
 }
 
 if (upstreamNode != null) {

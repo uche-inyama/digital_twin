@@ -1,0 +1,13 @@
+2026-04-15 21:00:48.220921: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-04-15 21:00:48.976679: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+STATE_DIR: C:\Users\okech\Models\DigitalTwin\agent
+MODELS_DIR: C:\Users\okech\Models\DigitalTwin\agent\rl_anyLogic\models
+Reading state from: C:\Users\okech\Models\DigitalTwin\agent\state_rl_Manufacturer.json
+Loading model: C:\Users\okech\Models\DigitalTwin\agent\rl_anyLogic\models\policy_Stable_final
+[Manufacturer] Scenario: Stable, RL order: 9.906283020973206
+Response written to: C:\Users\okech\Models\DigitalTwin\agent\response_rl_Manufacturer.json
+This script location: C:\Users\okech\Models\DigitalTwin\agent\rl_inference_file.py
+STATE_DIR resolves to: C:\Users\okech\Models\DigitalTwin\agent
+MODELS_DIR resolves to: C:\Users\okech\Models\DigitalTwin\agent\rl_anyLogic\models
+State file exists: True
+Model file exists: True

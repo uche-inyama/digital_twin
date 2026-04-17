@@ -3,16 +3,17 @@ from env.supply_chain_env import AnyLogicEnv
 from utils.model_versioning import save_version
 
 
-def continue_training(path="models/policy_v1_final", timesteps=100_000):
+def continue_training(model_path, timesteps=100_000):
 
     env = AnyLogicEnv()
 
-    model = PPO.load(path, env=env)
+    model = PPO.load(model_path, env=env)
 
     model.learn(total_timesteps=timesteps)
 
     save_version(model, "policy_v2")
 
-    model.save("models/policy_v2_final")
+    model.save(f"{model_path}_continued")
+    print(f"✅ Model saved to {model_path}_continued")
 
     return model

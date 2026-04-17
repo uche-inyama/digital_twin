@@ -6,13 +6,13 @@ from py4j.java_gateway import JavaGateway
 
 class AnyLogicEnv(gym.Env):
 
-    def __init__(self, max_time=52):
+    def __init__(self, max_steps=100):
         super().__init__()
 
         self.gateway = JavaGateway()
         self.model = self.gateway.entry_point
 
-        self.max_time = max_time
+        self.max_steps = max_steps
 
         # Action: normalized RL output
         self.action_space = spaces.Box(
@@ -32,7 +32,9 @@ class AnyLogicEnv(gym.Env):
 
     def reset(self, seed=None, options=None):
         super().reset(seed=seed)
-        self.model.resetModel()
+        # self.model.resetModel()
+        self.current_step = 0
+        # print(f"RESET called - current_step = {self.current_step}")  # DEBUG
 
         obs = np.array(self.model.getState(), dtype=np.float32)
         return obs, {}
@@ -53,10 +55,15 @@ class AnyLogicEnv(gym.Env):
 
         obs = np.array(self.model.getState(), dtype=np.float32)
 
-        reward = float(self.model.getReward())
-        reward = np.tanh(reward / 100.0)
+        # Get raw cost from AnyLogic (holding + backlog)
+        raw_cost = float(self.model.getReward())
 
-        terminated = self.model.getTime() >= self.max_time
+        reward = raw_cost
+
+        reward = reward / 100.0
+
+        self.current_step += 1
+        terminated = self.current_step >= self.max_steps
         truncated = False
 
         return obs, reward, terminated, truncated, {}

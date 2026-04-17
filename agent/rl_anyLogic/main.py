@@ -1,6 +1,5 @@
 from training.train import train
 from training.continue_training import continue_training
-from training.trained import run_trained_model
 from env.supply_chain_env import AnyLogicEnv
 import sys
 
@@ -16,6 +15,6 @@ if __name__ == "__main__":
     print(f"🎯 Training for demand scenario: {scenario} ({scenario_name})")
     
     # Train (pass integer to set in AnyLogic)
-    model = train(200_000, scenario_value=scenario, scenario_name=scenario_name)
-    model = continue_training(f"models/policy_{scenario_name}_final", 100_000)
+    model = train(500_000, scenario_value=scenario, scenario_name=scenario_name)
+    model = continue_training(f"models/policy_{scenario_name}_final", 200_000)
     

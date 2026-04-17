@@ -28,13 +28,34 @@ if (downstreamNode != null) {
 }
 /*ALCODEEND*/}
 
-double callLLMAgent()
+double callLLMAgent(double rlOrder,String rlReasoning,double rlConfidence)
 {/*ALCODESTART::1772751311292*/
 // ── Write state.json for Python ───────────────────────────
-String stateDir     = agentScriptPath.replace("agent.py", "");
+
+traceln("[" + tierName + "] ====== callLLMAgent START =====");
+    traceln("[" + tierName + "] DEBUG: rlOrder received = " + rlOrder);
+    traceln("[" + tierName + "] DEBUG: rlConfidence received = " + rlConfidence);
+    traceln("[" + tierName + "] DEBUG: rlReasoning received = " + rlReasoning);
+    
+    
+String stateDir = agentScriptPath.replace("agent.py", "");
 String responsePath = stateDir + "response_" + tierName + ".json";
 
 try {
+
+    // ========== WRITE RL POLICY FILE (ONLY IF RL ORDER > 0) ==========
+    if (rlOrder > 0) {
+        String rlPolicyPath = stateDir + "rl_policy_" + tierName + ".json";
+        String rlPolicyJson = String.format(
+            "{\"rl_order\":%.2f,\"rl_confidence\":%.2f,\"rl_reasoning\":\"%s\"}",
+            rlOrder, rlConfidence, rlReasoning
+        );
+        java.io.FileWriter rlFw = new java.io.FileWriter(rlPolicyPath);
+        rlFw.write(rlPolicyJson);
+        rlFw.close();
+        traceln("[" + tierName + "] Wrote RL policy file: " + rlPolicyPath);
+    }
+    
     // Call Python script FIRST (without writing state)
     ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath, tierName);
     pb.redirectErrorStream(true);
@@ -145,7 +166,7 @@ if (time() < 1.0) {
 }
 
 // Get system-wide state for SGA
-Main main = (Main) getOwner();
+/*Main main = (Main) getOwner();
 double systemTotalBacklog = main.retailer.backlog
 		+ main.distributor.backlog
 		+ main.manufacturer.backlog;
@@ -173,6 +194,24 @@ String rlStateJson = String.format(
 		orderUpTo, time(), downstreamInventory,
 		downstreamBacklog, systemTotalBacklog,
 		systemTotalInventory, systemSL, shipped);
+		main.getDemandScenario();
+*/
+		
+String rlStateJson = "{"
+    + "\"tier\":\"" + tierName + "\","
+    + "\"inventory\":" + inventory + ","
+    + "\"backlog\":" + backlog + ","
+    + "\"downstreamInventory\":" + downstreamInventory + ","
+    + "\"downstreamBacklog\":" + downstreamBacklog + ","
+    + "\"retailerInventory\":" + ((Main)getOwner()).retailer.inventory + ","
+    + "\"retailerBacklog\":" + ((Main)getOwner()).retailer.backlog + ","
+    + "\"distributorInventory\":" + ((Main)getOwner()).distributor.inventory + ","
+    + "\"distributorBacklog\":" + ((Main)getOwner()).distributor.backlog + ","
+    + "\"manufacturerInventory\":" + ((Main)getOwner()).manufacturer.inventory + ","
+    + "\"manufacturerBacklog\":" + ((Main)getOwner()).manufacturer.backlog + ","
+    + "\"demandScenario\":" + ((Main)getOwner()).demandScenario + ","
+    + "\"simTime\":" + time()
+    + "}";
 
 try {
 	// Write RL state file
@@ -184,7 +223,7 @@ try {
 	// Call RL agent script
 	ProcessBuilder pb = new ProcessBuilder("python",
 			agentScriptPath.replace("agent.py",
-					"train_offline.py"),
+					"rl_inference_file.py"),
 			tierName);
 	pb.redirectOutput(new java.io.File(rlLogPath));
 	pb.redirectErrorStream(true);

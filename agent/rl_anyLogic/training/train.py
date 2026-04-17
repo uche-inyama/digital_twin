@@ -2,10 +2,12 @@ from stable_baselines3 import PPO
 from env.supply_chain_env import AnyLogicEnv
 from utils.model_versioning import save_version
 
-def train(total_timesteps=200_000, scenario_value=1, scenario_name="Stable"):
+def train(total_timesteps=200_000, scenario_value=0, scenario_name="Stable"):
 
     env = AnyLogicEnv()
-
+    
+    env.model.setDemandScenario(scenario_value)
+    
     model = PPO(
         "MlpPolicy",
         env,
@@ -20,7 +22,6 @@ def train(total_timesteps=200_000, scenario_value=1, scenario_name="Stable"):
 
     model.learn(total_timesteps=total_timesteps)
 
-    env.model.setDemandScenario(scenario_value)
     print(f"📊 Set demand scenario to: {scenario_value}")
     
     # Create model with name

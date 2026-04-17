@@ -12,13 +12,7 @@ scenario = main.getDemandScenario()
 scenario_names = {0: "Stable", 1: "Shock", 2: "Disruption"}
 scenario_name = scenario_names.get(scenario, "Stable")
 
-model = PPO.load(f"../models/policy_{scenario_name}_final")
-
-# model_path = os.path.abspath(f"models/policy_{scenario_name}_final")
-# print(f"Loading from: {model_path}")
-
-# model = PPO.load(model_path)
-# # model = PPO.load(f"models/policy_{scenario_name}_final")
+model = PPO.load(f"../models/policy_{scenario_name}_final_continued")
 
 print(f"🤖 Testing {scenario_name} model in AnyLogic")
 print("Watch the simulation...")
@@ -29,7 +23,7 @@ main.resetModel()
 
 # Run for 100 weeks
 step = 0
-while main.getTime() < 102:  # Changed from 52 to 100
+while main.getTime() < 102:  
   # Get current state
   state = main.getState()
   
@@ -37,8 +31,6 @@ while main.getTime() < 102:  # Changed from 52 to 100
   action, _ = model.predict(state, deterministic=True)
   
   # Apply action
-  # main.setRLAction(action.tolist())
-  # Use the 3-parameter version - NO type conversion issues
   main.setRLAction(float(action[0]), float(action[1]), float(action[2]))
   
   # Run one step (one week)

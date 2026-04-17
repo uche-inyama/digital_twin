@@ -79,10 +79,9 @@ traceln("====================================");
 
 double resumeFromHITL()
 {/*ALCODESTART::1775364336579*/
-// Find which tier is waiting
 SupplyNode waitingTier = null;
-if (retailer.awaitingHumanInput)     waitingTier = retailer;
-else if (distributor.awaitingHumanInput) waitingTier = distributor;
+if (retailer.awaitingHumanInput)          waitingTier = retailer;
+else if (distributor.awaitingHumanInput)  waitingTier = distributor;
 else if (manufacturer.awaitingHumanInput) waitingTier = manufacturer;
 
 if (waitingTier == null) return;
@@ -90,9 +89,9 @@ if (waitingTier == null) return;
 // Apply human decision
 if (humanDecisionAccept) {
     waitingTier.outgoingOrder = waitingTier.pendingOrder;
-    traceln("[HITL] Human ACCEPTED LLM order: " + waitingTier.outgoingOrder);
+    traceln("[HITL] Human ACCEPTED order: " + waitingTier.outgoingOrder);
 } else {
-    waitingTier.outgoingOrder = Math.min(hitlHumanOrder, 24.0);
+    waitingTier.outgoingOrder = hitlHumanOrder;
     traceln("[HITL] Human OVERRODE to: " + waitingTier.outgoingOrder);
 }
 
@@ -108,19 +107,28 @@ if (waitingTier.upstreamNode != null) {
         + waitingTier.leadTime + " weeks");
 }
 
+// Log cost and datasets for the paused week
+waitingTier.totalCost += 0.5 * Math.max(0, waitingTier.inventory)
+                       + 1.0 * Math.max(0, waitingTier.backlog);
+waitingTier.inventoryData.add(waitingTier.time(), waitingTier.inventory);
+waitingTier.backlogData.add(waitingTier.time(), waitingTier.backlog);
+waitingTier.orderData.add(waitingTier.time(), waitingTier.outgoingOrder);
+waitingTier.shippedData.add(waitingTier.time(), waitingTier.shipped);
+waitingTier.incomingOrderData.add(waitingTier.time(), waitingTier.incomingOrder);
+
 // Clear HITL state
 waitingTier.awaitingHumanInput = false;
 waitingTier.pendingOrder       = 0;
-hitlTierName   = "";
-hitlInventory  = 0;
-hitlBacklog    = 0;
+hitlTierName       = "";
+hitlInventory      = 0;
+hitlBacklog        = 0;
 hitlSuggestedOrder = 0;
-hitlConfidence = 0;
-hitlReasoning  = "";
-hitlWeek       = 0;
+hitlConfidence     = 0;
+hitlReasoning      = "";
+hitlWeek           = 0;
+humanDecisionAccept = false;
 interventionCount++;
 
-// Resume simulation
 getEngine().run();
 /*ALCODEEND*/}
 
@@ -139,6 +147,11 @@ double[] state = new double[6];
     // Manufacturer
     state[4] = manufacturer.inventory;
     state[5] = manufacturer.backlog;
+    
+    traceln("[STATE] " + retailer.inventory + "," + retailer.backlog + ","
+      + distributor.inventory + "," + distributor.backlog + ","
+      + (retailer.inventory + distributor.inventory + manufacturer.inventory) + ","
+      + (retailer.backlog + distributor.backlog + manufacturer.backlog));
     
     return state;  // MUST return the array
 /*ALCODEEND*/}
@@ -169,26 +182,16 @@ getEngine().step();
 
 double resetModel()
 {/*ALCODESTART::1775403879999*/
-  	retailer.inventory = 0;
-    retailer.backlog = 0;
-
-    distributor.inventory = 0;
-    distributor.backlog = 0;
-
-    manufacturer.inventory = 0;
-    manufacturer.backlog = 0;
-
-    retailer.totalCost = 0;
-    retailer.totalShipped = 0;
-    retailer.totalReceived = 0;
-
-    distributor.totalCost = 0;
-    distributor.totalShipped = 0;
-    distributor.totalReceived = 0;
-
-    manufacturer.totalCost = 0;
-    manufacturer.totalShipped = 0;
-    manufacturer.totalReceived = 0;
+  // DO NOT reset inventory - let it continue naturally
+    // Only reset if you need to track episode boundaries for other reasons
+    
+    traceln("Episode boundary reached. Current time: " + getEngine().getTime() + 
+            ", Inventory: R=" + retailer.inventory + 
+            ", D=" + distributor.inventory + 
+            ", M=" + manufacturer.inventory);
+    
+    // Optional: Reset step counter or episode-specific tracking
+    // But keep inventory values as they are!
 /*ALCODEEND*/}
 
 int getDemandScenario()

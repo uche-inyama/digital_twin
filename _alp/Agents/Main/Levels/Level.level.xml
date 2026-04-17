@@ -994,6 +994,8 @@
 		</BasicProperties>
 		<ExtendedProperties>
 			<Font Name="Dialog" Size="11" Style="0"/>
+			<MinValue>0</MinValue>
+			<MaxValue>100</MaxValue>
 			<LinkTo>true</LinkTo>
 			<Link>hitlHumanOrder</Link>
 		</ExtendedProperties>
