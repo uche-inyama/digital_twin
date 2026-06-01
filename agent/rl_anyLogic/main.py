@@ -12,7 +12,7 @@ if __name__ == "__main__":
     scenario_names = {0: "Stable", 1: "Shock", 2: "Disruption"}
     scenario_name = scenario_names.get(scenario, "Stable")
     
-    print(f"🎯 Training for demand scenario: {scenario} ({scenario_name})")
+    print(f"Training for demand scenario: {scenario} ({scenario_name})")
     
     # Train (pass integer to set in AnyLogic)
     model = train(500_000, scenario_value=scenario, scenario_name=scenario_name)

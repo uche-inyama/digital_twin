@@ -34,8 +34,6 @@ class AnyLogicEnv(gym.Env):
         super().reset(seed=seed)
         # self.model.resetModel()
         self.current_step = 0
-        # print(f"RESET called - current_step = {self.current_step}")  # DEBUG
-
         obs = np.array(self.model.getState(), dtype=np.float32)
         return obs, {}
 

@@ -294,7 +294,7 @@
 		<Rotation>0.0</Rotation>
 		<Color>-16777216</Color>
 		<Text><![CDATA[text]]></Text>
-		<TextCode>String.format("Bullwhip Effect\nRetailer:     %.2f\nDistributor:  %.2f\nManufacturer: %.2f\n\nBenchmark (Sterman 1989): &gt; 2.0",
+		<TextCode>String.format("Bullwhip Effect\nRetailer:     %.2f\nDistributor:  %.2f\nManufacturer: %.2f\n\nBenchmark (Sterman 1989): &gt; 1.0",
     bwrRetailer, bwrDistributor, bwrManufacturer)</TextCode>
 		<Font>
 			<Name><![CDATA[SansSerif]]></Name>

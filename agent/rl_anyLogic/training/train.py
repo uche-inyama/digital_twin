@@ -22,7 +22,7 @@ def train(total_timesteps=200_000, scenario_value=0, scenario_name="Stable"):
 
     model.learn(total_timesteps=total_timesteps)
 
-    print(f"📊 Set demand scenario to: {scenario_value}")
+    print(f"Set demand scenario to: {scenario_value}")
     
     # Create model with name
     model_name = f"policy_{scenario_name}"

@@ -170,7 +170,7 @@ double backlogCost = 1.0 * (
   Math.max(0, manufacturer.backlog)
 );
 
- double reward = -(holdingCost + backlogCost);
+double reward = -(holdingCost + backlogCost);
 
  return reward;
 /*ALCODEEND*/}
@@ -203,9 +203,7 @@ double setDemandScenario(int scenario)
 {/*ALCODESTART::1775416118787*/
 // Update your existing demand scenario parameter
     this.demandScenario = scenario;
-    
-    // Also update any demand generation logic
-    // This depends on how you implemented demand
+   
     traceln("📊 Demand scenario changed to: " + scenario);
 /*ALCODEEND*/}
 

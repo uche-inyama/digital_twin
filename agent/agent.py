@@ -4,9 +4,11 @@ import os
 import anthropic
 import re
 
+
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
 tier_arg = sys.argv[1] if len(sys.argv) > 1 else "Unknown"
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATE_FILE = os.path.join(BASE_DIR, f"state_{tier_arg}.json")
 RESPONSE_FILE = os.path.join(BASE_DIR, f"response_{tier_arg}.json")
@@ -32,10 +34,10 @@ if os.path.exists(RL_POLICY_FILE):
 else:
     print(f"[RL ADVISOR] No suggestion available")
 
-# ── Fix backlog ────────────────────────────────────────────────
-if state["backlog"] > 0:
-    state["inventory"] = max(0, state["inventory"] - state["backlog"])
-    print(f"[FIX] Adjusted inventory to {state['inventory']}")
+# # ── Fix backlog ────────────────────────────────────────────────
+# if state["backlog"] > 0:
+#     state["inventory"] = max(0, state["inventory"] - state["backlog"])
+#     print(f"[FIX] Adjusted inventory to {state['inventory']}")
 
 # ── Extract variables ──────────────────────────────────────────
 tier = state["tier"]
@@ -80,21 +82,14 @@ else:
 if rl_order:
         prompt += f"""
         === RL ADVISOR (PRIORITY INSTRUCTION) ===
-        Trained RL policy recommends: {rl_order:.1f} units
+        Trained RL policy recommends: {rl_order:.0f} units
         This policy was trained to minimise system-wide cost and bullwhip ratio.
         OVERRIDE the collaboration rules above with this recommendation.
         ONLY deviate if: backlog == 0 AND inventory > 3x order-up-to ({order_up_to * 3}).
         Do NOT reduce this order based on downstream inventory alone.
-        Your order_quantity should be close to {rl_order:.1f} units.
+        Your order_quantity should be close to {rl_order:.0f} units.
         """
-#      prompt += f"""
-# === RL ADVISOR ===
-# Trained RL model recommends: {rl_order:.1f} units (confidence: {rl_confidence*100:.0f}%)
-# IMPORTANT: This RL policy was trained to minimise bullwhip ratio.
-# Unless you have a strong reason to deviate, stay within 20% of this recommendation.
-# Maximum acceptable deviation: {rl_order * 0.8:.1f} to {rl_order * 1.2:.1f} units.
-# """
-
+        
 # ── Response format ───────────────────────────────────────────
 prompt += f"""
 Respond ONLY with this JSON:
@@ -113,10 +108,11 @@ response_text = message.content[0].text.strip()
 response_text = response_text.replace("```json", "").replace("```", "").strip()
 
 json_match = re.search(r'\{.*\}', response_text, re.DOTALL)
-if json_match:
+
+if response_text:
     try:
         result = json.loads(json_match.group())
-        order_qty = max(0, min(30, float(result.get("order_quantity", 0))))
+        order_qty = max(0.0, min(order_up_to, float(result.get("order_quantity", 0))))
         confidence = max(0.0, min(1.0, float(result.get("confidence", 0))))
         reasoning = result.get("reasoning", "")
         print(f"[LLM DECISION] Order={order_qty}, Conf={confidence}, Reason={reasoning}")

@@ -6,6 +6,7 @@ double demand = incomingOrder + backlog;
 shipped = Math.min(demand, inventory);
 
 inventory -= shipped;
+
 backlog = Math.max(0, demand - shipped);
 
 // Step 2: Forward shipment downstream with lead time delay
@@ -19,14 +20,14 @@ if (downstreamNode != null) {
         ((Main)getOwner()).demandScenario == 2 &&
         time() >= 40 && time() <= 50) {
         actualShipped = shipped * 0.2;
-        traceln("[Manufacturer] DISRUPTION ACTIVE — shipping only " +
-                actualShipped + " of " + shipped + " requested");
+        traceln("[Manufacturer] DISRUPTION ACTIVE — shipping only "
+         + actualShipped + " of " + shipped + " requested");
     } else {
         actualShipped = shipped;
     }
 
-    traceln("[" + tierName + "] Calling create_deliveryShipment with " +
-            actualShipped + " units, leadTime = " + leadTime);
+    traceln("[" + tierName + "] Calling create_deliveryShipment with " 
+    + actualShipped + " units, leadTime = " + leadTime);
     traceln("[" + tierName + "] leadTime = " + leadTime);
 
     downstreamNode.create_deliveryShipment(leadTime, actualShipped);
@@ -44,8 +45,6 @@ if (downstreamNode != null) {
     downstreamInventory = 0;
     downstreamBacklog   = 0;
 }
-
-// Step 4: Calculate and place replenishment order upstream
 
 // Step 4: Calculate and place replenishment order upstream
 if (agentEnabled) {
@@ -85,11 +84,12 @@ if (agentEnabled) {
 	        rlOrder      = callRLAgent();
 	        rlConfidence = agentConfidence;
 	        rlReasoning  = agentReasoning;
-	        traceln("[" + tierName + "] RL DECIDES: order=" + rlOrder +
-	                " conf=" + rlConfidence);
+	        traceln("[" + tierName + "] RL DECIDES: order=" + rlOrder + " conf=" + rlConfidence);
 	    } catch (Exception e) {
 	        traceln("[" + tierName + "] RL not available: " + e.getMessage());
 	        rlOrder = Math.max(0, orderUpTo - (inventory - backlog));
+	        rlConfidence = 0.0;  // Explicitly set to indicate fallback
+    		rlReasoning = "Fallback to rule-based due to RL error";
 	    }
 	
 	    // RL order capped at tier-specific orderUpTo
@@ -121,11 +121,13 @@ if (agentEnabled) {
 	}
     
     // HITL — pause for human review if enabled
+    Main main = (Main) getOwner();
     boolean crisisDetected = (backlog > main.crisisBacklogThreshold && inventory == 0);
     if (hitlEnabled && (agentConfidence < 0.85 || crisisDetected)) {
         pendingOrder        = outgoingOrder;
         awaitingHumanInput  = true;
-
+		
+		
         main.hitlTierName      = tierName;
         main.hitlInventory     = inventory;
         main.hitlBacklog       = backlog;
@@ -147,31 +149,13 @@ if (agentEnabled) {
         return;
     }
 
-} else {
-    // Step 3.5: Apply information sharing to rule-based order
-   if (!agentEnabled && informationSharing && downstreamNode != null) {
-        // NEW LOGIC: Backlog is PRIORITY
-        double excess = Math.max(0, downstreamInventory - orderUpTo);
-        double baseOrder = Math.max(0, orderUpTo - inventory);
-        
-        // Order = MAX(backlog, baseOrder - excess)
-        outgoingOrder = Math.max(backlog, baseOrder - excess);
-        outgoingOrder = Math.min(outgoingOrder, orderUpTo);
-        
-        traceln("[" + tierName + "] NEW Info Sharing: inv=" + inventory 
-                + " back=" + backlog
-                + " downInv=" + downstreamInventory
-                + " excess=" + excess
-                + " baseOrder=" + baseOrder
-                + " order=" + outgoingOrder);
-        
-    } else if (!agentEnabled) {
+} else if(!agentEnabled) {
         // Original rule-based (no information sharing)
         double inventoryPosition = inventory - backlog;
         outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);
         outgoingOrder = Math.min(outgoingOrder, orderUpTo);
-    }
-}
+ }
+
 
 if (upstreamNode != null) {
     upstreamNode.receiveOrder(outgoingOrder);

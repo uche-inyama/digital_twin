@@ -14,7 +14,7 @@ scenario_name = scenario_names.get(scenario, "Stable")
 
 model = PPO.load(f"../models/policy_{scenario_name}_final_continued")
 
-print(f"🤖 Testing {scenario_name} model in AnyLogic")
+print(f"Testing {scenario_name} model in AnyLogic")
 print("Watch the simulation...")
 print("-" * 50)
 
@@ -40,5 +40,5 @@ while main.getTime() < 102:
   print(f"Week {step}: Time={main.getTime():.1f}, Action={[round(a,1) for a in action]}")
 
 print("-" * 50)
-print(f"✅ Test complete! Total weeks: {step}")
-print(f"💰 Final Reward: {main.getReward():.2f}")
+print(f"Test complete! Total weeks: {step}")
+print(f"Final Reward: {main.getReward():.2f}")

@@ -40,16 +40,18 @@ traceln("[" + tierName + "] ====== callLLMAgent START =====");
     
 String stateDir = agentScriptPath.replace("agent.py", "");
 String responsePath = stateDir + "response_" + tierName + ".json";
+String logPath = stateDir + "log_LLM" + tierName + ".txt";
 
 try {
 
     // ========== WRITE RL POLICY FILE (ONLY IF RL ORDER > 0) ==========
     if (rlOrder > 0) {
-        String rlPolicyPath = stateDir + "rl_policy_" + tierName + ".json";
-        String rlPolicyJson = String.format(
-            "{\"rl_order\":%.2f,\"rl_confidence\":%.2f,\"rl_reasoning\":\"%s\"}",
-            rlOrder, rlConfidence, rlReasoning
-        );
+        String rlPolicyPath = stateDir + "rl_policy_" + tierName + ".json";        
+        String rlPolicyJson = "{"
+		    + "\"rl_order\":" + rlOrder + ","
+		    + "\"rl_confidence\":" + rlConfidence + ","
+		    + "\"rl_reasoning\":\"" + rlReasoning + "\""
+		    + "}";
         java.io.FileWriter rlFw = new java.io.FileWriter(rlPolicyPath);
         rlFw.write(rlPolicyJson);
         rlFw.close();
@@ -58,37 +60,42 @@ try {
     
     // Call Python script FIRST (without writing state)
     ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath, tierName);
+    pb.redirectOutput(new java.io.File(logPath));
     pb.redirectErrorStream(true);
     Process process = pb.start();
 
-    // ── Capture Python output ──────────────────────────────
-    java.io.BufferedReader reader = new java.io.BufferedReader(
-        new java.io.InputStreamReader(process.getInputStream()));
-    StringBuilder pythonOutput = new StringBuilder();
-    String line;
-    while ((line = reader.readLine()) != null) {
-        pythonOutput.append(line).append("\n");
-    }
+   
+    try {
+    java.nio.file.Path lp = java.nio.file.Paths.get(logPath);
+    String logContent = new String(java.nio.file.Files.readAllBytes(lp));
+	    if (logContent.trim().length() > 0) {
+	        traceln("[" + tierName + "] Python: " + logContent.trim());
+	    }
+	} catch (Exception logEx) {
+	    /* not critical */
+	}
 
     // Wait up to 10 seconds for response
     boolean finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS);
 
     // Always print Python output for debugging
-    if (pythonOutput.length() > 0) {
-        traceln("[" + tierName + "] Python: " + pythonOutput.toString().trim());
-    }
+    //if (pythonOutput.length() > 0) {
+        //traceln("[" + tierName + "] Python: " + pythonOutput.toString().trim());
+    //}
 
     if (!finished) {
         traceln("[" + tierName + "] WARNING: Python timed out — rule-based fallback");
         process.destroyForcibly();
-        return Math.max(0, orderUpTo - (inventory - backlog));
+        double inventoryPosition = inventory - backlog;
+        return Math.max(0, orderUpTo - inventoryPosition);
     }
 
     // Check response file exists
     java.io.File responseFile = new java.io.File(responsePath);
     if (!responseFile.exists()) {
         traceln("[" + tierName + "] WARNING: No response file — rule-based fallback");
-        return Math.max(0, orderUpTo - (inventory - backlog));
+        double inventoryPosition = inventory - backlog;
+        return Math.max(0, orderUpTo - inventoryPosition);
     }
 
     // Read response file
@@ -153,10 +160,8 @@ double callRLAgent()
 // ── Write tier-specific state file for RL agent
 // ───────────────────────────
 String stateDir = agentScriptPath.replace("agent.py", "");
-String rlStatePath = stateDir + "state_rl_" + tierName
-		+ ".json";
-String rlRespPath = stateDir + "response_rl_" + tierName
-		+ ".json";
+String rlStatePath = stateDir + "state_rl_" + tierName + ".json";
+String rlRespPath = stateDir + "response_rl_" + tierName + ".json";
 String rlLogPath = stateDir + "log_rl_" + tierName + ".txt";
 
 if (time() < 1.0) {
@@ -164,38 +169,6 @@ if (time() < 1.0) {
 			stateDir + "prev_rl_" + tierName + ".json")
 			.delete();
 }
-
-// Get system-wide state for SGA
-/*Main main = (Main) getOwner();
-double systemTotalBacklog = main.retailer.backlog
-		+ main.distributor.backlog
-		+ main.manufacturer.backlog;
-double systemTotalInventory = main.retailer.inventory
-		+ main.distributor.inventory
-		+ main.manufacturer.inventory;
-double totalShipped = main.retailer.totalShipped
-		+ main.distributor.totalShipped
-		+ main.manufacturer.totalShipped;
-double totalReceived = main.retailer.totalReceived
-		+ main.distributor.totalReceived
-		+ main.manufacturer.totalReceived;
-double systemSL = totalReceived > 0
-		? totalShipped / totalReceived
-		: 1.0;
-
-String rlStateJson = String.format(
-		"{\"tier\":\"%s\",\"inventory\":%.2f,\"backlog\":%.2f,"
-				+ "\"lastDemand\":%.2f,\"leadTime\":%d,\"orderUpTo\":%d,"
-				+ "\"simTime\":%.2f,"
-				+ "\"downstreamInventory\":%.2f,\"downstreamBacklog\":%.2f,"
-				+ "\"systemTotalBacklog\":%.2f,\"systemTotalInventory\":%.2f,"
-				+ "\"systemServiceLevel\":%.4f,\"shippedLast\":%.2f}",
-		tierName, inventory, backlog, lastDemand, leadTime,
-		orderUpTo, time(), downstreamInventory,
-		downstreamBacklog, systemTotalBacklog,
-		systemTotalInventory, systemSL, shipped);
-		main.getDemandScenario();
-*/
 		
 String rlStateJson = "{"
     + "\"tier\":\"" + tierName + "\","
@@ -215,40 +188,32 @@ String rlStateJson = "{"
 
 try {
 	// Write RL state file
-	java.io.FileWriter fw = new java.io.FileWriter(
-			rlStatePath);
+	java.io.FileWriter fw = new java.io.FileWriter(rlStatePath);
 	fw.write(rlStateJson);
 	fw.close();
 
 	// Call RL agent script
-	ProcessBuilder pb = new ProcessBuilder("python",
-			agentScriptPath.replace("agent.py",
-					"rl_inference_file.py"),
-			tierName);
+	ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath.replace("agent.py",
+					"rl_inference_file.py"),tierName);
 	pb.redirectOutput(new java.io.File(rlLogPath));
 	pb.redirectErrorStream(true);
 	Process process = pb.start();
 
-	boolean finished = process.waitFor(30,
-			java.util.concurrent.TimeUnit.SECONDS);
+	boolean finished = process.waitFor(30, java.util.concurrent.TimeUnit.SECONDS);
 
 	if (!finished) {
-		traceln("[" + tierName
-				+ "] RL agent timed out — rule-based fallback");
+		traceln("[" + tierName+ "] RL agent timed out — rule-based fallback");
 		process.destroyForcibly();
-		double ip = inventory - backlog;
-		return Math.max(0, orderUpTo - ip);
+		double inventoryPosition = inventory - backlog;
+		return Math.max(0, orderUpTo - inventoryPosition);
 	}
 
 	// Read log
 	try {
-		java.nio.file.Path lp = java.nio.file.Paths
-				.get(rlLogPath);
-		String logContent = new String(
-				java.nio.file.Files.readAllBytes(lp));
+		java.nio.file.Path lp = java.nio.file.Paths.get(rlLogPath);
+		String logContent = new String(java.nio.file.Files.readAllBytes(lp));
 		if (logContent.trim().length() > 0) {
-			traceln("[" + tierName + "] "
-					+ logContent.trim());
+			traceln("[" + tierName + "] " + logContent.trim());
 		}
 	} catch (Exception logEx) {
 		/* not critical */ }
@@ -257,22 +222,17 @@ try {
 	if (!new java.io.File(rlRespPath).exists()) {
 		traceln("[" + tierName
 				+ "] RL response not found — rule-based fallback");
-		double ip = inventory - backlog;
-		return Math.max(0, orderUpTo - ip);
+		double inventoryPosition = inventory - backlog;
+		return Math.max(0, orderUpTo - inventoryPosition);
 	}
 
 	// Read response
-	java.nio.file.Path rp = java.nio.file.Paths
-			.get(rlRespPath);
-	String responseJson = new String(
-			java.nio.file.Files.readAllBytes(rp));
+	java.nio.file.Path rp = java.nio.file.Paths.get(rlRespPath);
+	String responseJson = new String(java.nio.file.Files.readAllBytes(rp));
 
-	agentConfidence = parseJsonDouble(responseJson,
-			"confidence");
-	agentReasoning = parseJsonString(responseJson,
-			"reasoning");
-	double orderQty = parseJsonDouble(responseJson,
-			"order_quantity");
+	agentConfidence = parseJsonDouble(responseJson,"confidence");
+	agentReasoning = parseJsonString(responseJson,"reasoning");
+	double orderQty = parseJsonDouble(responseJson,"order_quantity");
 
 	traceln("[" + tierName + "] t=" + time()
 			+ " -> RL order=" + orderQty + " confidence="
@@ -281,8 +241,7 @@ try {
 	return Math.max(0, orderQty);
 
 } catch (Exception e) {
-	traceln("[" + tierName + "] ERROR calling RL agent: "
-			+ e.getMessage());
+	traceln("[" + tierName + "] ERROR calling RL agent: " + e.getMessage());
 	double ip = inventory - backlog;
 	return Math.max(0, orderUpTo - ip);
 }

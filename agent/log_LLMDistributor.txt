@@ -1,0 +1,3 @@
+[RL ADVISOR] No suggestion available
+[LLM DECISION] Order=11.0, Conf=0.85, Reason=Order to reach target level 24, account for lead time demand
+[Distributor] t=15 -> FINAL ORDER=11.0 (LLM decision)
