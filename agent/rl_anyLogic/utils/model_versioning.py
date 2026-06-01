@@ -20,7 +20,7 @@ def save_best(model, score, best_score):
     if score > best_score:
         path = f"{MODEL_DIR}/policy_best"
         model.save(path)
-        print("🔥 New BEST model saved!")
+        print("New BEST model saved!")
         return score
     return best_score
 
