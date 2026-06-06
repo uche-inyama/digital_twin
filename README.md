@@ -17,9 +17,11 @@
 
 | Parameter             | Description        | Values                                                                                |
 |:----------------------|:-------------------|:--------------------------------------------------------------------------------------|
-| `demandScenario`      | Demand pattern     | 0 = Stable, 1 = Shock, 2 = Disruption                                                 |
-| `autonomyCondition`   | Autonomy level     | A0 = Baseline, A2 = Full Auto, A3 = Info_sharing, A4 = LLM + RL, A5 = LLM + RL + HITL |
+| `demandScenario`      | Demand Scenario     | 0 = Stable, 1 = Shock, 2 = Disruption                                                 |
+| `autonomyCondition`   | Autonomy level     | 0 = Baseline, 2 = Full Auto, 3 = Info_sharing, 4 = LLM + RL, 5 = LLM + RL + HITL |
 | `replicationNumber`   | Replication number | 1 to 5                                                                                |
+
+FYI: The values of ``` Demand Scenario ``` are crucial, because a function in AnyLogic - DigitalTwin environment needs them.
 
 #### 5. Enabling checkboxes in the main
 
