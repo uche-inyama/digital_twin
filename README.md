@@ -20,7 +20,7 @@
 | `autonomyCondition`   | Autonomy level     | A0 = Baseline, A2 = Full Auto, A3 = Info_sharing, A4 = LLM + RL, A5 = LLM + RL + HITL |
 | `replicationNumber`   | Replication number | 1 to 5                                                                                |
 
-### 5. Enabling Agents & HITL checkbox in main
+### 5. Enabling checkboxes in the main
 
 | Condition        | Agent Enabled | Info Sharing | LLM | RL | HITL |
 |------------------|--------------|--------------|-----|----|------|
