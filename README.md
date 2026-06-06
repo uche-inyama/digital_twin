@@ -35,4 +35,4 @@
 - click ▶️ on AnyLogic to run the simulation
 
 #### 7. My results
-- It is at the root of the project folder: ```Sprint3_Results0.xlsx ```,
+- It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet.
