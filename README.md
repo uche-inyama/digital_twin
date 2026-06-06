@@ -34,4 +34,3 @@
 - click ▶️ on AnyLogic application to run simulation
 
 ### 7. My results
-📊 [Download Excel Workbook](./results/Sprint3_Results0.xlsx)
