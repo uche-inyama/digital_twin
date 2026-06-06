@@ -3,7 +3,7 @@
 - git clone https://github.com/uche-inyama/digital_twin.git
 - cd into digital_twin
 
-### 2. Install Python dependencies
+### 2. Install Python dependency
 - cd into agent & run pip install anthropic
 
 ### 3. Set your Anthropic API Key
