@@ -32,6 +32,7 @@
 | A5 LLM+RL+HITL   | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### 6. Run the simulation
-- click ▶️ on AnyLogic to run simulation
+- click ▶️ on AnyLogic to run the simulation
 
 ### 7. My results
+- At the root of the folder, open Sprint3_Results0.xlsx 
