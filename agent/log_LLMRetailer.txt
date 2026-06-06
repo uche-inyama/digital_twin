@@ -1,3 +1,3 @@
 [RL ADVISOR] No suggestion available
-[LLM DECISION] Order=11.0, Conf=0.85, Reason=Reorder to target 24. Last demand zero suggests caution.
+[LLM DECISION] Order=11.0, Conf=0.95, Reason=Order to reach target level 24, account for 2-week lead time
 [Retailer] t=15 -> FINAL ORDER=11.0 (LLM decision)

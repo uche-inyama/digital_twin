@@ -1,0 +1,4525 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AnyLogicWorkspace splitVersion="1"
+                   WorkspaceVersion="1.9"
+                   AnyLogicVersion="8.9.8.202602271015"
+                   AlpVersion="8.9.7">
+	<Model xmlns:al="http://anylogic.com">
+		<Id>1772350491138</Id>
+		<Name>DigitalTwin</Name>
+		<EngineVersion>6</EngineVersion>
+		<JavaPackageName>supplychaindigitaltwin</JavaPackageName>
+		<ModelTimeUnit>Week</ModelTimeUnit>
+		<Folders/>
+		<ActiveObjectClasses>
+			<ActiveObjectClass>
+				<Id>1772350491142</Id>
+				<Name>Main</Name>
+				<AdditionalClassCode>public void setRLAction(double[] action) {&#xD;
+  retailer.rlOrderInput = action[0];&#xD;
+  distributor.rlOrderInput = action[1];&#xD;
+  manufacturer.rlOrderInput = action[2];&#xD;
+}&#xD;
+&#xD;
+public void setRLAction(double r, double d, double m) {&#xD;
+  retailer.rlOrderInput = r;&#xD;
+  distributor.rlOrderInput = d;&#xD;
+  manufacturer.rlOrderInput = m;&#xD;
+}</AdditionalClassCode>
+				<Import>import py4j.GatewayServer;</Import>
+				<StartupCode>GatewayServer gatewayServer = new GatewayServer(this);
+gatewayServer.start();
+traceln("GatewayServer started for RL connection");
+initialiseChain();</StartupCode>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1772350491147</Id>
+					<Name>1772350491147</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor>-4144960</SceneBackgroundColor>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>true</AutoCreate>
+					<Id>1772350491141</Id>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1772352000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">WEEK</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">WEEK</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1772350491145</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1772350491148</CurrentLevel>
+				<ConnectionsId>1772350491143</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1772534502253</Id>
+						<Name>bwrRetailer</Name>
+						<X>620</X>
+						<Y>30</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772534505335</Id>
+						<Name>bwrDistributor</Name>
+						<X>620</X>
+						<Y>70</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772534508218</Id>
+						<Name>bwrManufacturer</Name>
+						<X>620</X>
+						<Y>110</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363878742</Id>
+						<Name>hitlEnabled</Name>
+						<X>410</X>
+						<Y>40</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+							<InitialValue Class="CodeValue">
+								<Code>false</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363887945</Id>
+						<Name>humanDecisionAccept</Name>
+						<X>410</X>
+						<Y>60</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+							<InitialValue Class="CodeValue">
+								<Code>false</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363895736</Id>
+						<Name>hitlHumanOrder</Name>
+						<X>410</X>
+						<Y>80</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363902531</Id>
+						<Name>hitlTierName</Name>
+						<X>410</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>String</Type>
+							<InitialValue Class="CodeValue">
+								<Code>""</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363905859</Id>
+						<Name>hitlInventory</Name>
+						<X>410</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363908913</Id>
+						<Name>hitlBacklog</Name>
+						<X>410</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363911807</Id>
+						<Name>hitlSuggestedOrder</Name>
+						<X>410</X>
+						<Y>160</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363943059</Id>
+						<Name>hitlConfidence</Name>
+						<X>410</X>
+						<Y>180</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363954103</Id>
+						<Name>hitlReasoning</Name>
+						<X>410</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>String</Type>
+							<InitialValue Class="CodeValue">
+								<Code>""</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363956313</Id>
+						<Name>hitlWeek</Name>
+						<X>410</X>
+						<Y>220</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775363960061</Id>
+						<Name>interventionCount</Name>
+						<X>410</X>
+						<Y>240</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>int</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772865375930</Id>
+						<Name>demandScenario</Name>
+						<X>620</X>
+						<Y>310</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>2</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772865375928</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1773003117490</Id>
+						<Name>autonomyCondition</Name>
+						<X>620</X>
+						<Y>330</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>1</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1773003117488</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1773003127361</Id>
+						<Name>replicationNumber</Name>
+						<X>620</X>
+						<Y>350</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>1</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1773003127359</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1775366148043</Id>
+						<Name>crisisBacklogThreshold</Name>
+						<X>410</X>
+						<Y>290</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>double</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>20</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1775366148041</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Events>
+					<Event>
+						<Id>1772354370924</Id>
+						<Name>customerDemand</Name>
+						<X>20</X>
+						<Y>470</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties TriggerType="timeout" Mode="cyclic">
+							<Timeout Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</Timeout>
+							<Rate Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="RateUnits">PER_WEEK</Unit>
+							</Rate>
+							<Id>1772354370922</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772438400000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>5</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+							<Condition>false</Condition>
+						</Properties>
+						<Action>double baseDemand = Math.max(4, normal(10, 2));&#xD;
+double demand;&#xD;
+&#xD;
+if (demandScenario == 0) {&#xD;
+    demand = baseDemand;&#xD;
+} else if (demandScenario == 1) {&#xD;
+    // S2 — Demand Shock at week 30, lasts 5 weeks&#xD;
+    if (time() &gt;= 30 &amp;&amp; time() &lt;= 35) {&#xD;
+        demand = baseDemand * 3.0;&#xD;
+    } else {&#xD;
+        demand = baseDemand;&#xD;
+    }&#xD;
+} else {&#xD;
+    // S3 — Supply Disruption (demand normal)&#xD;
+    demand = baseDemand;&#xD;
+}&#xD;
+&#xD;
+retailer.receiveOrder(demand);&#xD;
+customerDemandData.add(time(), demand);&#xD;
+traceln("Week " + time() + " — Demand: " + demand);</Action>
+						<Logging>false</Logging>
+					</Event>
+					<Event>
+						<Id>1772535155690</Id>
+						<Name>endOfRun</Name>
+						<X>620</X>
+						<Y>230</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties TriggerType="timeout" Mode="occuresOnce">
+							<Timeout Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</Timeout>
+							<Rate Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="RateUnits">PER_WEEK</Unit>
+							</Rate>
+							<Id>1772535155688</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772611200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>100</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+							<Condition>false</Condition>
+						</Properties>
+						<Action>// ── Calculate Bullwhip Ratios ──&#xD;
+calculateBullwhip();&#xD;
+&#xD;
+// ── Print summary to console ──&#xD;
+traceln("=== END OF RUN RESULTS ===");&#xD;
+traceln("Condition: " + autonomyCondition + " | Scenario: " + demandScenario + " | Rep: " + replicationNumber);&#xD;
+traceln("Retailer BWR:      " + bwrRetailer);&#xD;
+traceln("Distributor BWR:   " + bwrDistributor);&#xD;
+traceln("Manufacturer BWR:  " + bwrManufacturer);&#xD;
+traceln("Retailer Cost:     " + retailer.totalCost);&#xD;
+traceln("Distributor Cost:  " + distributor.totalCost);&#xD;
+traceln("Manufacturer Cost: " + manufacturer.totalCost);&#xD;
+traceln("Total Cost:        " + (retailer.totalCost + distributor.totalCost + manufacturer.totalCost));&#xD;
+traceln("==========================");&#xD;
+&#xD;
+// ── File paths ──&#xD;
+String folder = "C:/Users/okech/Models/DigitalTwin/results/";&#xD;
+String summaryFile = folder + "summary_results.csv";&#xD;
+String tsFile = folder + "timeseries_A" + autonomyCondition +&#xD;
+                "_S" + demandScenario +&#xD;
+                "_R" + replicationNumber + ".csv";&#xD;
+&#xD;
+// ── Export summary header (only if file does not exist yet) ──&#xD;
+java.io.File summaryFileCheck = new java.io.File(summaryFile);&#xD;
+if (!summaryFileCheck.exists()) {&#xD;
+    try {&#xD;
+        java.io.FileWriter fw = new java.io.FileWriter(summaryFile, false);&#xD;
+        fw.write("Condition,Scenario,Replication," +&#xD;
+                 "RetailerBWR,DistributorBWR,ManufacturerBWR," +&#xD;
+                 "RetailerCost,DistributorCost,ManufacturerCost,TotalCost\n");&#xD;
+        fw.close();&#xD;
+        traceln("Summary file created with header");&#xD;
+    } catch (Exception e) { traceln("Summary header error: " + e); }&#xD;
+}&#xD;
+&#xD;
+// ── Export summary data row ──&#xD;
+try {&#xD;
+    java.io.FileWriter fw = new java.io.FileWriter(summaryFile, true);&#xD;
+    fw.write(autonomyCondition + "," +&#xD;
+             demandScenario + "," +&#xD;
+             replicationNumber + "," +&#xD;
+             bwrRetailer + "," +&#xD;
+             bwrDistributor + "," +&#xD;
+             bwrManufacturer + "," +&#xD;
+             retailer.totalCost + "," +&#xD;
+             distributor.totalCost + "," +&#xD;
+             manufacturer.totalCost + "," +&#xD;
+             (retailer.totalCost + distributor.totalCost + manufacturer.totalCost) + "\n");&#xD;
+    fw.close();&#xD;
+} catch (Exception e) { traceln("Summary data error: " + e); }&#xD;
+&#xD;
+// ── Export weekly time series (only if file does not exist yet) ──&#xD;
+java.io.File tsFileCheck = new java.io.File(tsFile);&#xD;
+if (!tsFileCheck.exists()) {&#xD;
+    try {&#xD;
+        java.io.FileWriter tsfw = new java.io.FileWriter(tsFile, false);&#xD;
+        tsfw.write("Week,Tier,Inventory,Backlog,Order,Shipped,IncomingOrder\n");&#xD;
+&#xD;
+        for (int i = 0; i &lt; retailer.inventoryData.size(); i++) {&#xD;
+            tsfw.write(retailer.inventoryData.getX(i) + ",Retailer," +&#xD;
+                       retailer.inventoryData.getY(i) + "," +&#xD;
+                       retailer.backlogData.getY(i) + "," +&#xD;
+                       retailer.orderData.getY(i) + "," +&#xD;
+                       retailer.shippedData.getY(i) + "," +&#xD;
+                       retailer.incomingOrderData.getY(i) + "\n");&#xD;
+        }&#xD;
+&#xD;
+        for (int i = 0; i &lt; distributor.inventoryData.size(); i++) {&#xD;
+            tsfw.write(distributor.inventoryData.getX(i) + ",Distributor," +&#xD;
+                       distributor.inventoryData.getY(i) + "," +&#xD;
+                       distributor.backlogData.getY(i) + "," +&#xD;
+                       distributor.orderData.getY(i) + "," +&#xD;
+                       distributor.shippedData.getY(i) + "," +&#xD;
+                       distributor.incomingOrderData.getY(i) + "\n");&#xD;
+        }&#xD;
+&#xD;
+        for (int i = 0; i &lt; manufacturer.inventoryData.size(); i++) {&#xD;
+            tsfw.write(manufacturer.inventoryData.getX(i) + ",Manufacturer," +&#xD;
+                       manufacturer.inventoryData.getY(i) + "," +&#xD;
+                       manufacturer.backlogData.getY(i) + "," +&#xD;
+                       manufacturer.orderData.getY(i) + "," +&#xD;
+                       manufacturer.shippedData.getY(i) + "," +&#xD;
+                       manufacturer.incomingOrderData.getY(i) + "\n");&#xD;
+        }&#xD;
+&#xD;
+        tsfw.close();&#xD;
+        traceln("Time series exported: " + tsFile);&#xD;
+    } catch (Exception e) { traceln("TS write error: " + e); }&#xD;
+} else {&#xD;
+    traceln("WARNING: " + tsFile + " already exists — not overwritten");&#xD;
+    traceln("&gt;&gt;&gt; Change replicationNumber before running again");&#xD;
+}&#xD;
+&#xD;
+// ── Reminder: run just completed  ──&#xD;
+traceln("&gt;&gt;&gt; CURRENT RUN: A" + autonomyCondition + &#xD;
+        " x S" + demandScenario + &#xD;
+        " x Rep" + replicationNumber + " COMPLETE");&#xD;
+traceln("&gt;&gt;&gt; Remember: only increment replicationNumber after all 9 cells are done");</Action>
+						<Logging>false</Logging>
+					</Event>
+				</Events>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772354473818</Id>
+						<Name>initialiseChain</Name>
+						<X>620</X>
+						<Y>270</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>// Initialise inventory&#xD;
+retailer.inventory      = retailer.initialInventory;&#xD;
+distributor.inventory   = distributor.initialInventory;&#xD;
+manufacturer.inventory  = manufacturer.initialInventory;&#xD;
+&#xD;
+// Set order up to levels&#xD;
+retailer.orderUpTo     = 24;&#xD;
+distributor.orderUpTo  = 24;&#xD;
+manufacturer.orderUpTo = 24;&#xD;
+&#xD;
+// Wire upstream nodes — who to order from&#xD;
+retailer.upstreamNode     = distributor;&#xD;
+distributor.upstreamNode  = manufacturer;&#xD;
+manufacturer.upstreamNode = null;  // Manufacturer has no upstream&#xD;
+&#xD;
+// Wire downstream nodes — who to ship to&#xD;
+retailer.downstreamNode     = null;  // Retailer ships to customer directly&#xD;
+distributor.downstreamNode  = retailer;&#xD;
+manufacturer.downstreamNode = distributor;&#xD;
+&#xD;
+// Pre-fill pipeline — simulate shipments already in transit at t=0&#xD;
+retailer.create_deliveryShipment(1, 8.0);&#xD;
+retailer.create_deliveryShipment(2, 8.0);&#xD;
+&#xD;
+distributor.create_deliveryShipment(1, 8.0);&#xD;
+distributor.create_deliveryShipment(2, 8.0);&#xD;
+&#xD;
+manufacturer.create_deliveryShipment(1, 8.0);&#xD;
+manufacturer.create_deliveryShipment(2, 8.0);</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772534572250</Id>
+						<Name>calcVariance</Name>
+						<X>620</X>
+						<Y>150</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>ds</Name>
+							<Type>DataSet</Type>
+						</Parameter>
+						<Body>// Get number of samples&#xD;
+int n = ds.size();&#xD;
+if (n &lt; 2) return 0;&#xD;
+&#xD;
+// Calculate mean&#xD;
+double sum = 0;&#xD;
+for (int i = 0; i &lt; n; i++) {&#xD;
+    sum += ds.getY(i);&#xD;
+}&#xD;
+double mean = sum / n;&#xD;
+&#xD;
+// Calculate variance&#xD;
+double sumSq = 0;&#xD;
+for (int i = 0; i &lt; n; i++) {&#xD;
+    double diff = ds.getY(i) - mean;&#xD;
+    sumSq += diff * diff;&#xD;
+}&#xD;
+return sumSq / n;</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772535083227</Id>
+						<Name>calculateBullwhip</Name>
+						<X>620</X>
+						<Y>190</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>// Get demand variance (denominator — same for all tiers)&#xD;
+double demandVar = calcVariance(customerDemandData);&#xD;
+&#xD;
+if (demandVar == 0) {&#xD;
+    traceln("WARNING: Demand variance is zero — cannot compute BWR");&#xD;
+    return;&#xD;
+}&#xD;
+&#xD;
+// Compute BWR for each tier&#xD;
+bwrRetailer     = calcVariance(retailer.orderData)      / demandVar;&#xD;
+bwrDistributor  = calcVariance(distributor.orderData)   / demandVar;&#xD;
+bwrManufacturer = calcVariance(manufacturer.orderData)  / demandVar;&#xD;
+&#xD;
+// Print results to console&#xD;
+traceln("=== BULLWHIP RATIOS (end of run) ===");&#xD;
+traceln("Customer Demand Variance : " + demandVar);&#xD;
+traceln("Retailer     BWR : " + bwrRetailer);&#xD;
+traceln("Distributor  BWR : " + bwrDistributor);&#xD;
+traceln("Manufacturer BWR : " + bwrManufacturer);&#xD;
+traceln("====================================");</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775364336579</Id>
+						<Name>resumeFromHITL</Name>
+						<X>410</X>
+						<Y>260</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>SupplyNode waitingTier = null;&#xD;
+if (retailer.awaitingHumanInput)          waitingTier = retailer;&#xD;
+else if (distributor.awaitingHumanInput)  waitingTier = distributor;&#xD;
+else if (manufacturer.awaitingHumanInput) waitingTier = manufacturer;&#xD;
+&#xD;
+if (waitingTier == null) return;&#xD;
+&#xD;
+// Apply human decision&#xD;
+if (humanDecisionAccept) {&#xD;
+    waitingTier.outgoingOrder = waitingTier.pendingOrder;&#xD;
+    traceln("[HITL] Human ACCEPTED order: " + waitingTier.outgoingOrder);&#xD;
+} else {&#xD;
+    waitingTier.outgoingOrder = hitlHumanOrder;&#xD;
+    traceln("[HITL] Human OVERRODE to: " + waitingTier.outgoingOrder);&#xD;
+}&#xD;
+&#xD;
+// Place order upstream&#xD;
+if (waitingTier.upstreamNode != null) {&#xD;
+    waitingTier.upstreamNode.receiveOrder(waitingTier.outgoingOrder);&#xD;
+} else {&#xD;
+    waitingTier.create_deliveryShipment(&#xD;
+        waitingTier.leadTime, waitingTier.outgoingOrder);&#xD;
+    traceln("[" + waitingTier.tierName + "] Ordered "&#xD;
+        + waitingTier.outgoingOrder&#xD;
+        + " from external source — arriving in "&#xD;
+        + waitingTier.leadTime + " weeks");&#xD;
+}&#xD;
+&#xD;
+// Log cost and datasets for the paused week&#xD;
+waitingTier.totalCost += 0.5 * Math.max(0, waitingTier.inventory)&#xD;
+                       + 1.0 * Math.max(0, waitingTier.backlog);&#xD;
+waitingTier.inventoryData.add(waitingTier.time(), waitingTier.inventory);&#xD;
+waitingTier.backlogData.add(waitingTier.time(), waitingTier.backlog);&#xD;
+waitingTier.orderData.add(waitingTier.time(), waitingTier.outgoingOrder);&#xD;
+waitingTier.shippedData.add(waitingTier.time(), waitingTier.shipped);&#xD;
+waitingTier.incomingOrderData.add(waitingTier.time(), waitingTier.incomingOrder);&#xD;
+&#xD;
+// Clear HITL state&#xD;
+waitingTier.awaitingHumanInput = false;&#xD;
+waitingTier.pendingOrder       = 0;&#xD;
+hitlTierName       = "";&#xD;
+hitlInventory      = 0;&#xD;
+hitlBacklog        = 0;&#xD;
+hitlSuggestedOrder = 0;&#xD;
+hitlConfidence     = 0;&#xD;
+hitlReasoning      = "";&#xD;
+hitlWeek           = 0;&#xD;
+humanDecisionAccept = false;&#xD;
+interventionCount++;&#xD;
+&#xD;
+getEngine().run();</Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double[]</ReturnType>
+						<Id>1775403861537</Id>
+						<Name>getState</Name>
+						<X>30</X>
+						<Y>590</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>double[] state = new double[6];&#xD;
+    &#xD;
+    // Retailer&#xD;
+    state[0] = retailer.inventory;&#xD;
+    state[1] = retailer.backlog;&#xD;
+    &#xD;
+    // Distributor&#xD;
+    state[2] = distributor.inventory;&#xD;
+    state[3] = distributor.backlog;&#xD;
+    &#xD;
+    // Manufacturer&#xD;
+    state[4] = manufacturer.inventory;&#xD;
+    state[5] = manufacturer.backlog;&#xD;
+    &#xD;
+    traceln("[STATE] " + retailer.inventory + "," + retailer.backlog + ","&#xD;
+      + distributor.inventory + "," + distributor.backlog + ","&#xD;
+      + (retailer.inventory + distributor.inventory + manufacturer.inventory) + ","&#xD;
+      + (retailer.backlog + distributor.backlog + manufacturer.backlog));&#xD;
+    &#xD;
+    return state;  // MUST return the array</Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775403868999</Id>
+						<Name>getReward</Name>
+						<X>30</X>
+						<Y>610</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>double holdingCost = 0.5 * (&#xD;
+  Math.max(0, retailer.inventory) +&#xD;
+  Math.max(0, distributor.inventory) +&#xD;
+  Math.max(0, manufacturer.inventory)&#xD;
+);&#xD;
+&#xD;
+double backlogCost = 1.0 * (&#xD;
+  Math.max(0, retailer.backlog) +&#xD;
+  Math.max(0, distributor.backlog) +&#xD;
+  Math.max(0, manufacturer.backlog)&#xD;
+);&#xD;
+&#xD;
+double reward = -(holdingCost + backlogCost);&#xD;
+&#xD;
+ return reward;</Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775403874914</Id>
+						<Name>runOneStep</Name>
+						<X>30</X>
+						<Y>630</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>getEngine().step();</Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775403879999</Id>
+						<Name>resetModel</Name>
+						<X>30</X>
+						<Y>650</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>  // DO NOT reset inventory - let it continue naturally&#xD;
+    // Only reset if you need to track episode boundaries for other reasons&#xD;
+    &#xD;
+    traceln("Episode boundary reached. Current time: " + getEngine().getTime() + &#xD;
+            ", Inventory: R=" + retailer.inventory + &#xD;
+            ", D=" + distributor.inventory + &#xD;
+            ", M=" + manufacturer.inventory);&#xD;
+    &#xD;
+    // Optional: Reset step counter or episode-specific tracking&#xD;
+    // But keep inventory values as they are!</Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>int</ReturnType>
+						<Id>1775416113436</Id>
+						<Name>getDemandScenario</Name>
+						<X>30</X>
+						<Y>690</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>return demandScenario; </Body>
+					</Function>
+					<Function AccessType="public" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775416118787</Id>
+						<Name>setDemandScenario</Name>
+						<X>30</X>
+						<Y>720</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>scenario</Name>
+							<Type>int</Type>
+						</Parameter>
+						<Body>// Update your existing demand scenario parameter&#xD;
+    this.demandScenario = scenario;&#xD;
+   &#xD;
+    traceln("📊 Demand scenario changed to: " + scenario);</Body>
+					</Function>
+				</Functions>
+				<AnalysisData>
+					<DataSet>
+						<Id>1772534346777</Id>
+						<Name>customerDemandData</Name>
+						<X>20</X>
+						<Y>440</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772534346775</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772611200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+				</AnalysisData>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1772350491143</Id>
+						<Name>connections</Name>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<EmbeddedObjects>
+					<EmbeddedObject>
+						<Id>1772353749704</Id>
+						<Name>retailer</Name>
+						<X>30</X>
+						<Y>90</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1772353749706</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>supplychaindigitaltwin</PackageName>
+							<ClassName>SupplyNode</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>supplychaindigitaltwin</PackageName>
+								<ClassName>SupplyNode</ClassName>
+								<ItemName>1772350822848</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters>
+							<Parameter>
+								<Name>tierName</Name>
+								<Value Class="CodeValue">
+									<Code>"Retailer"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>initialInventory</Name>
+							</Parameter>
+							<Parameter>
+								<Name>leadTime</Name>
+							</Parameter>
+							<Parameter>
+								<Name>orderUpTo</Name>
+							</Parameter>
+							<Parameter>
+								<Name>upstreamNode</Name>
+								<Value Class="CodeValue">
+									<Code>distributor</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>downstreamNode</Name>
+							</Parameter>
+							<Parameter>
+								<Name>agentEnabled</Name>
+								<Value Class="CodeValue">
+									<Code>true</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>agentScriptPath</Name>
+								<Value Class="CodeValue">
+									<Code>"C:/Users/okech/Models/DigitalTwin/agent/agent.py"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>informationSharing</Name>
+							</Parameter>
+							<Parameter>
+								<Name>hitlEnabled</Name>
+							</Parameter>
+							<Parameter>
+								<Name>rlEnabled</Name>
+							</Parameter>
+						</Parameters>
+						<ReplicationFlag>false</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>SPECIFIED_NUMBER</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<Id>1772353749702</Id>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+					<EmbeddedObject>
+						<Id>1772353781087</Id>
+						<Name>distributor</Name>
+						<X>30</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1772353781089</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>supplychaindigitaltwin</PackageName>
+							<ClassName>SupplyNode</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>supplychaindigitaltwin</PackageName>
+								<ClassName>SupplyNode</ClassName>
+								<ItemName>1772350822848</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters>
+							<Parameter>
+								<Name>tierName</Name>
+								<Value Class="CodeValue">
+									<Code>"Distributor"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>initialInventory</Name>
+							</Parameter>
+							<Parameter>
+								<Name>leadTime</Name>
+							</Parameter>
+							<Parameter>
+								<Name>orderUpTo</Name>
+								<Value Class="CodeValue">
+									<Code>40</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>upstreamNode</Name>
+								<Value Class="CodeValue">
+									<Code>manufacturer</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>downstreamNode</Name>
+								<Value Class="CodeValue">
+									<Code>retailer</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>agentEnabled</Name>
+								<Value Class="CodeValue">
+									<Code>true</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>agentScriptPath</Name>
+								<Value Class="CodeValue">
+									<Code>"C:/Users/okech/Models/DigitalTwin/agent/agent.py"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>informationSharing</Name>
+							</Parameter>
+							<Parameter>
+								<Name>hitlEnabled</Name>
+							</Parameter>
+							<Parameter>
+								<Name>rlEnabled</Name>
+							</Parameter>
+						</Parameters>
+						<ReplicationFlag>false</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>SPECIFIED_NUMBER</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<Id>1772353781085</Id>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+					<EmbeddedObject>
+						<Id>1772353801819</Id>
+						<Name>manufacturer</Name>
+						<X>30</X>
+						<Y>340</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<PresentationId>1772353801821</PresentationId>
+						<ActiveObjectClass>
+							<PackageName>supplychaindigitaltwin</PackageName>
+							<ClassName>SupplyNode</ClassName>
+						</ActiveObjectClass>
+						<GenericParameterSubstitute>
+							<GenericParameterSubstituteReference>
+								<PackageName>supplychaindigitaltwin</PackageName>
+								<ClassName>SupplyNode</ClassName>
+								<ItemName>1772350822848</ItemName>
+							</GenericParameterSubstituteReference>
+						</GenericParameterSubstitute>
+						<Parameters>
+							<Parameter>
+								<Name>tierName</Name>
+								<Value Class="CodeValue">
+									<Code>"Manufacturer"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>initialInventory</Name>
+							</Parameter>
+							<Parameter>
+								<Name>leadTime</Name>
+							</Parameter>
+							<Parameter>
+								<Name>orderUpTo</Name>
+								<Value Class="CodeValue">
+									<Code>50</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>upstreamNode</Name>
+							</Parameter>
+							<Parameter>
+								<Name>downstreamNode</Name>
+								<Value Class="CodeValue">
+									<Code>distributor</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>agentEnabled</Name>
+								<Value Class="CodeValue">
+									<Code>true</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>agentScriptPath</Name>
+								<Value Class="CodeValue">
+									<Code>"C:/Users/okech/Models/DigitalTwin/agent/agent.py"</Code>
+								</Value>
+							</Parameter>
+							<Parameter>
+								<Name>informationSharing</Name>
+							</Parameter>
+							<Parameter>
+								<Name>hitlEnabled</Name>
+							</Parameter>
+							<Parameter>
+								<Name>rlEnabled</Name>
+							</Parameter>
+						</Parameters>
+						<ReplicationFlag>false</ReplicationFlag>
+						<Replication Class="CodeValue">
+							<Code>100</Code>
+						</Replication>
+						<CollectionType>ARRAY_LIST_BASED</CollectionType>
+						<InEnvironment>true</InEnvironment>
+						<InitialLocationType>XYZ</InitialLocationType>
+						<ColumnCode Class="CodeValue">
+							<Code>0</Code>
+						</ColumnCode>
+						<RowCode Class="CodeValue">
+							<Code>0</Code>
+						</RowCode>
+						<LocationNameCode Class="CodeValue">
+							<Code>""</Code>
+						</LocationNameCode>
+						<InitializationType>SPECIFIED_NUMBER</InitializationType>
+						<InitializationDatabaseTableQuery>
+							<Id>1772353801817</Id>
+							<TableReference/>
+						</InitializationDatabaseTableQuery>
+						<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
+						<QuantityColumn/>
+					</EmbeddedObject>
+				</EmbeddedObjects>
+				<Presentation>
+					<Level>
+						<Id>1772350491148</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+						<Presentation>
+							<Rectangle>
+								<Id>1772360960764</Id>
+								<Name>rectangle</Name>
+								<X>140</X>
+								<Y>40</Y>
+								<Label>
+									<X>10</X>
+									<Y>10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<ZHeight>10</ZHeight>
+								<LineWidth>1</LineWidth>
+								<LineColor>-16777216</LineColor>
+								<LineMaterial>null</LineMaterial>
+								<LineStyle>SOLID</LineStyle>
+								<Width>180</Width>
+								<Height>110</Height>
+								<Rotation>0.0</Rotation>
+								<FillColor>-4144960</FillColor>
+								<FillMaterial>null</FillMaterial>
+							</Rectangle>
+							<Rectangle>
+								<Id>1772360987461</Id>
+								<Name>rectangle1</Name>
+								<X>140</X>
+								<Y>160</Y>
+								<Label>
+									<X>10</X>
+									<Y>10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<ZHeight>10</ZHeight>
+								<LineWidth>1</LineWidth>
+								<LineColor>-16777216</LineColor>
+								<LineMaterial>null</LineMaterial>
+								<LineStyle>SOLID</LineStyle>
+								<Width>180</Width>
+								<Height>110</Height>
+								<Rotation>0.0</Rotation>
+								<FillColor>-4144960</FillColor>
+								<FillMaterial>null</FillMaterial>
+							</Rectangle>
+							<Rectangle>
+								<Id>1772360995826</Id>
+								<Name>rectangle2</Name>
+								<X>140</X>
+								<Y>290</Y>
+								<Label>
+									<X>10</X>
+									<Y>10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<ZHeight>10</ZHeight>
+								<LineWidth>1</LineWidth>
+								<LineColor>-16777216</LineColor>
+								<LineMaterial>null</LineMaterial>
+								<LineStyle>SOLID</LineStyle>
+								<Width>180</Width>
+								<Height>90</Height>
+								<Rotation>0.0</Rotation>
+								<FillColor>-4144960</FillColor>
+								<FillMaterial>null</FillMaterial>
+							</Rectangle>
+							<Text>
+								<Id>1772361185624</Id>
+								<Name>retailerDisplay</Name>
+								<X>220</X>
+								<Y>40</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>true</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("RETAILER\nInventory: %.1f\nBacklog: %.1f\nOrder: %.1f\nCost: %.1f",
+    retailer.inventory,
+    retailer.backlog,
+    retailer.outgoingOrder,
+    retailer.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772361332833</Id>
+								<Name>distributorDisplay</Name>
+								<X>210</X>
+								<Y>170</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>true</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("DISTRIBUTOR\nInventory: %.1f\nBacklog: %.1f\nOrder: %.1f\nCost: %.1f",
+    distributor.inventory,
+    distributor.backlog,
+    distributor.outgoingOrder,
+    distributor.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772361403603</Id>
+								<Name>manufacturerDisplay</Name>
+								<X>210</X>
+								<Y>300</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>true</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("MANUFACTURER\nInventory: %.1f\nBacklog: %.1f\nOrder: %.1f\nCost: %.1f",
+    manufacturer.inventory,
+    manufacturer.backlog,
+    manufacturer.outgoingOrder,
+    manufacturer.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772361463110</Id>
+								<Name>text</Name>
+								<X>50</X>
+								<Y>20</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>true</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Simulation Time: %.1f weeks", time())</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772535273171</Id>
+								<Name>text1</Name>
+								<X>650</X>
+								<Y>440</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Retailer BWR: %.2f", bwrRetailer)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772535277137</Id>
+								<Name>text2</Name>
+								<X>650</X>
+								<Y>490</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Distributor BWR: %.2f", bwrDistributor)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772535280087</Id>
+								<Name>text3</Name>
+								<X>650</X>
+								<Y>540</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Manufacturer BWR: %.2f", bwrManufacturer)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772535409820</Id>
+								<Name>text4</Name>
+								<X>650</X>
+								<Y>590</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Bullwhip Effect\nRetailer:     %.2f\nDistributor:  %.2f\nManufacturer: %.2f\n\nBenchmark (Sterman 1989): &gt; 1.0",
+    bwrRetailer, bwrDistributor, bwrManufacturer)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<TimePlot>
+								<Id>1772544329089</Id>
+								<Name>distributorPlot</Name>
+								<X>1250</X>
+								<Y>30</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>true</AutoUpdate>
+								<RecurrenceProperties>
+									<Id>1772544329087</Id>
+									<OccurrenceAtTime>true</OccurrenceAtTime>
+									<OccurrenceDate>1772611200000</OccurrenceDate>
+									<OccurrenceTime Class="CodeUnitValue">
+										<Code>0</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</OccurrenceTime>
+									<RecurrenceCode Class="CodeUnitValue">
+										<Code>1</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</RecurrenceCode>
+								</RecurrenceProperties>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>360</Width>
+								<Height>230</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>280</Width>
+									<Height>140</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<VerScaleFromExpression>0</VerScaleFromExpression>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<DrawLine>true</DrawLine>
+								<Interpolation>LINEAR</Interpolation>
+								<DatasetExpression>
+									<Title>Distributor-Inventory</Title>
+									<Id>1772544332295</Id>
+									<Expression>dataset</Expression>
+									<Color>-16776961</Color>
+									<Expression2>distributor.inventory</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<DatasetExpression>
+									<Title>Distributor-Backlog</Title>
+									<Id>1772545261040</Id>
+									<Expression>dataset1</Expression>
+									<Color>-65281</Color>
+									<Expression2>distributor.backlog</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<SamplesToKeep>100</SamplesToKeep>
+								<TimeWindowExpression>100</TimeWindowExpression>
+								<FillAreaUnderLine>false</FillAreaUnderLine>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimePlot>
+							<TimePlot>
+								<Id>1772544406813</Id>
+								<Name>manufacturerPlot</Name>
+								<X>840</X>
+								<Y>260</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>true</AutoUpdate>
+								<RecurrenceProperties>
+									<Id>1772544406811</Id>
+									<OccurrenceAtTime>true</OccurrenceAtTime>
+									<OccurrenceDate>1772611200000</OccurrenceDate>
+									<OccurrenceTime Class="CodeUnitValue">
+										<Code>0</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</OccurrenceTime>
+									<RecurrenceCode Class="CodeUnitValue">
+										<Code>1</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</RecurrenceCode>
+								</RecurrenceProperties>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>370</Width>
+								<Height>250</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>290</Width>
+									<Height>160</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<VerScaleFromExpression>0</VerScaleFromExpression>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<DrawLine>true</DrawLine>
+								<Interpolation>LINEAR</Interpolation>
+								<DatasetExpression>
+									<Title>Manufacturer - Inventory</Title>
+									<Id>1772544406810</Id>
+									<Expression>dataset</Expression>
+									<Color>-4565549</Color>
+									<Expression2>manufacturer.inventory</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<DatasetExpression>
+									<Title>Manufacturer - Backlog</Title>
+									<Id>1772545656446</Id>
+									<Expression>dataset1</Expression>
+									<Color>-2354116</Color>
+									<Expression2>manufacturer.backlog</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<SamplesToKeep>100</SamplesToKeep>
+								<TimeWindowExpression>100</TimeWindowExpression>
+								<FillAreaUnderLine>false</FillAreaUnderLine>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimePlot>
+							<TimePlot>
+								<Id>1772544418746</Id>
+								<Name>retailerPlot</Name>
+								<X>850</X>
+								<Y>30</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>true</AutoUpdate>
+								<RecurrenceProperties>
+									<Id>1772544418744</Id>
+									<OccurrenceAtTime>true</OccurrenceAtTime>
+									<OccurrenceDate>1772611200000</OccurrenceDate>
+									<OccurrenceTime Class="CodeUnitValue">
+										<Code>0</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</OccurrenceTime>
+									<RecurrenceCode Class="CodeUnitValue">
+										<Code>1</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</RecurrenceCode>
+								</RecurrenceProperties>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>360</Width>
+								<Height>230</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>280</Width>
+									<Height>140</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<VerScaleFromExpression>0</VerScaleFromExpression>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<DrawLine>true</DrawLine>
+								<Interpolation>LINEAR</Interpolation>
+								<DatasetExpression>
+									<Title>Retailer - Inventory </Title>
+									<Id>1772544418743</Id>
+									<Expression>dataset</Expression>
+									<Color>-16744448</Color>
+									<Expression2>retailer.inventory</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<DatasetExpression>
+									<Title>Retailer-Backlog</Title>
+									<Id>1772545035529</Id>
+									<Expression>dataset1</Expression>
+									<Color>-65536</Color>
+									<Expression2>retailer.backlog</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<SamplesToKeep>100</SamplesToKeep>
+								<TimeWindowExpression>100</TimeWindowExpression>
+								<FillAreaUnderLine>false</FillAreaUnderLine>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimePlot>
+							<BarChart>
+								<Id>1772545800411</Id>
+								<Name>inventoryBarChart</Name>
+								<X>860</X>
+								<Y>540</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>true</AutoUpdate>
+								<RecurrenceProperties>
+									<Id>1772545800409</Id>
+									<OccurrenceAtTime>true</OccurrenceAtTime>
+									<OccurrenceDate>1772611200000</OccurrenceDate>
+									<OccurrenceTime Class="CodeUnitValue">
+										<Code>0</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</OccurrenceTime>
+									<RecurrenceCode Class="CodeUnitValue">
+										<Code>1</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</RecurrenceCode>
+								</RecurrenceProperties>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>350</Width>
+								<Height>290</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>270</Width>
+									<Height>160</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>70</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<DataItem>
+									<Id>1772545804355</Id>
+									<Expression>retailer.inventory</Expression>
+									<Color>-16744448</Color>
+									<Title>Current Inventory by Retailer</Title>
+								</DataItem>
+								<DataItem>
+									<Id>1772545916015</Id>
+									<Expression>distributor.inventory</Expression>
+									<Color>-16776961</Color>
+									<Title>Current Inventory by Distributor</Title>
+								</DataItem>
+								<DataItem>
+									<Id>1772546033100</Id>
+									<Expression>manufacturer.inventory</Expression>
+									<Color>-8388480</Color>
+									<Title>Current Inventory by Manufacturer</Title>
+								</DataItem>
+								<ScaleFromExpression>0</ScaleFromExpression>
+								<ScaleToExpression>1</ScaleToExpression>
+								<ScaleType>AUTO</ScaleType>
+								<Bars>
+									<Direction>UP</Direction>
+									<RelativeWidth>0.8</RelativeWidth>
+								</Bars>
+							</BarChart>
+							<Text>
+								<Id>1772546356777</Id>
+								<Name>text5</Name>
+								<X>1290</X>
+								<Y>590</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Retailer's total cost</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546360629</Id>
+								<Name>retailerTotalCostField</Name>
+								<X>1440</X>
+								<Y>590</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Retailer Cost: %.1f", retailer.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546368878</Id>
+								<Name>text7</Name>
+								<X>1290</X>
+								<Y>670</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Distributor's total cost</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546372021</Id>
+								<Name>text8</Name>
+								<X>1440</X>
+								<Y>670</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Distributor Cost: %.1f", distributor.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546374300</Id>
+								<Name>text9</Name>
+								<X>1290</X>
+								<Y>740</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Manufacturer's total cost</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546378470</Id>
+								<Name>text10</Name>
+								<X>1440</X>
+								<Y>740</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("Manufacturer Cost: %.1f", manufacturer.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546597768</Id>
+								<Name>text6</Name>
+								<X>1290</X>
+								<Y>790</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>Total system cost</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1772546614444</Id>
+								<Name>text11</Name>
+								<X>1440</X>
+								<Y>790</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>text</Text>
+								<TextCode>String.format("TOTAL SYSTEM COST: %.1f",
+    retailer.totalCost + distributor.totalCost + manufacturer.totalCost)</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<TimePlot>
+								<Id>1772871567449</Id>
+								<Name>demandPlot</Name>
+								<X>1290</X>
+								<Y>290</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<AutoUpdate>true</AutoUpdate>
+								<RecurrenceProperties>
+									<Id>1772871567447</Id>
+									<OccurrenceAtTime>true</OccurrenceAtTime>
+									<OccurrenceDate>1772956800000</OccurrenceDate>
+									<OccurrenceTime Class="CodeUnitValue">
+										<Code>0</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</OccurrenceTime>
+									<RecurrenceCode Class="CodeUnitValue">
+										<Code>1</Code>
+										<Unit Class="TimeUnits">WEEK</Unit>
+									</RecurrenceCode>
+								</RecurrenceProperties>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Width>340</Width>
+								<Height>210</Height>
+								<BackgroundColor/>
+								<BorderColor/>
+								<ChartArea>
+									<XOffset>50</XOffset>
+									<YOffset>30</YOffset>
+									<Width>260</Width>
+									<Height>120</Height>
+									<BackgroundColor>-1</BackgroundColor>
+									<BorderColor>-16777216</BorderColor>
+									<GridColor>-12566464</GridColor>
+								</ChartArea>
+								<Legend>
+									<Place>SOUTH</Place>
+									<TextColor>-16777216</TextColor>
+									<Size>30</Size>
+								</Legend>
+								<Labels>
+									<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+									<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+									<TextColor>-12566464</TextColor>
+								</Labels>
+								<ShowLegend>true</ShowLegend>
+								<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>
+								<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+								<VerScaleFromExpression>0</VerScaleFromExpression>
+								<VerScaleToExpression>1</VerScaleToExpression>
+								<VerScaleType>AUTO</VerScaleType>
+								<DrawLine>true</DrawLine>
+								<Interpolation>LINEAR</Interpolation>
+								<DatasetExpression>
+									<Title>Customer Demand</Title>
+									<Id>1772871572325</Id>
+									<Expression>dataset</Expression>
+									<Color>-6632142</Color>
+									<Expression2>retailer.incomingOrder</Expression2>
+									<Expression2Flag>true</Expression2Flag>
+									<PointStyle>NONE</PointStyle>
+									<LineWidth>1.0</LineWidth>
+								</DatasetExpression>
+								<SamplesToKeep>100</SamplesToKeep>
+								<TimeWindowExpression>100</TimeWindowExpression>
+								<FillAreaUnderLine>false</FillAreaUnderLine>
+								<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+							</TimePlot>
+							<Text>
+								<Id>1775365019091</Id>
+								<Name>text12</Name>
+								<X>350</X>
+								<Y>410</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text>"HUMAN REVIEW REQUIRED"</Text>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Text>
+								<Id>1775365043712</Id>
+								<Name>text13</Name>
+								<X>350</X>
+								<Y>490</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text/>
+								<TextCode>"Tier: " + hitlTierName + "\n" +
+"Week: " + (int)hitlWeek + "\n" +
+"Inventory: " + (int)hitlInventory + "\n" +
+"Backlog: " + (int)hitlBacklog + "\n" +
+"LLM Suggests: " + (int)hitlSuggestedOrder + "\n" +
+"Confidence: " + hitlConfidence + "\n" +
+"Reasoning: " + hitlReasoning</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+							<Control Type="EditBox">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1775365604762</Id>
+								<Name>editbox</Name>
+								<X>370</X>
+								<Y>670</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<FillColor>-1</FillColor>
+									<TextColor>-16777216</TextColor>
+									<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+									<Enabled>true</Enabled>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="11" Style="0"/>
+									<MinValue>0</MinValue>
+									<MaxValue>100</MaxValue>
+									<LinkTo>true</LinkTo>
+									<Link>hitlHumanOrder</Link>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="Button">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1775365754440</Id>
+								<Name>button</Name>
+								<X>300</X>
+								<Y>720</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor>-16777216</TextColor>
+									<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+									<Enabled>true</Enabled>
+									<ActionCode>humanDecisionAccept = true;
+resumeFromHITL();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="11" Style="0"/>
+									<LabelText>Accept</LabelText>
+								</ExtendedProperties>
+							</Control>
+							<Control Type="Button">
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Id>1775365759755</Id>
+								<Name>button1</Name>
+								<X>450</X>
+								<Y>720</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+								<BasicProperties Width="100" Height="30">
+									<EmbeddedIcon>false</EmbeddedIcon>
+									<TextColor>-16777216</TextColor>
+									<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+									<Enabled>true</Enabled>
+									<ActionCode>humanDecisionAccept = false;
+resumeFromHITL();</ActionCode>
+								</BasicProperties>
+								<ExtendedProperties>
+									<Font Name="Dialog" Size="11" Style="0"/>
+									<LabelText>Override</LabelText>
+								</ExtendedProperties>
+							</Control>
+							<Text>
+								<Id>1775366396447</Id>
+								<Name>text20</Name>
+								<X>350</X>
+								<Y>450</Y>
+								<Label>
+									<X>0</X>
+									<Y>-10</Y>
+								</Label>
+								<PublicFlag>true</PublicFlag>
+								<PresentationFlag>true</PresentationFlag>
+								<ShowLabel>false</ShowLabel>
+								<DrawMode>SHAPE_DRAW_2D</DrawMode>
+								<VisibleCode>!hitlTierName.isEmpty()</VisibleCode>
+								<EmbeddedIcon>false</EmbeddedIcon>
+								<Z>0</Z>
+								<Rotation>0.0</Rotation>
+								<Color>-16777216</Color>
+								<Text/>
+								<TextCode>"Crisis: " + (manufacturer.backlog &gt; 20 &amp;&amp; manufacturer.inventory == 0 ? "YES" : 
+              distributor.backlog &gt; 20 &amp;&amp; distributor.inventory == 0 ? "YES" :
+              retailer.backlog &gt; 20 &amp;&amp; retailer.inventory == 0 ? "YES" : "NO")</TextCode>
+								<Font>
+									<Name>SansSerif</Name>
+									<Size>10</Size>
+									<Style>0</Style>
+								</Font>
+								<Alignment>LEFT</Alignment>
+							</Text>
+						</Presentation>
+					</Level>
+					<EmbeddedObjectPresentation>
+						<Id>1772353749706</Id>
+						<Name>retailer_presentation</Name>
+						<X>260</X>
+						<Y>130</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+					<EmbeddedObjectPresentation>
+						<Id>1772353781089</Id>
+						<Name>distributor_presentation</Name>
+						<X>180</X>
+						<Y>170</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+					<EmbeddedObjectPresentation>
+						<Id>1772353801821</Id>
+						<Name>manufacturer_presentation</Name>
+						<X>160</X>
+						<Y>190</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<ScaleType>AUTOMATICALLY_CALCULATED</ScaleType>
+						<GISScaleForRealEmbeddedObjectPresentationSize>1000</GISScaleForRealEmbeddedObjectPresentationSize>
+						<GISScaleForFixedEmbeddedObjectPresentationSize>1000000000</GISScaleForFixedEmbeddedObjectPresentationSize>
+						<Latitude>0.0</Latitude>
+						<Longitude>0.0</Longitude>
+					</EmbeddedObjectPresentation>
+				</Presentation>
+			</ActiveObjectClass>
+			<ActiveObjectClass>
+				<Id>1772350822843</Id>
+				<Name>SupplyNode</Name>
+				<Generic>false</Generic>
+				<GenericParameter>
+					<Id>1772350822848</Id>
+					<Name>1772350822848</Name>
+					<GenericParameterValue Class="CodeValue">
+						<Code>T extends Agent</Code>
+					</GenericParameterValue>
+					<GenericParameterLabel>Generic parameter:</GenericParameterLabel>
+				</GenericParameter>
+				<FlowChartsUsage>ENTITY</FlowChartsUsage>
+				<SamplesToKeep>100</SamplesToKeep>
+				<LimitNumberOfArrayElements>false</LimitNumberOfArrayElements>
+				<ElementsLimitValue>100</ElementsLimitValue>
+				<MakeDefaultViewArea>true</MakeDefaultViewArea>
+				<SceneGridColor/>
+				<SceneBackgroundColor>-4144960</SceneBackgroundColor>
+				<SceneSkybox>null</SceneSkybox>
+				<AgentProperties>
+					<EnvironmentDefinesInitialLocation>true</EnvironmentDefinesInitialLocation>
+					<RotateAnimationTowardsMovement>true</RotateAnimationTowardsMovement>
+					<RotateAnimationVertically>false</RotateAnimationVertically>
+					<VelocityCode Class="CodeUnitValue">
+						<Code>10</Code>
+						<Unit Class="SpeedUnits">MPS</Unit>
+					</VelocityCode>
+					<PhysicalLength Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalLength>
+					<PhysicalWidth Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalWidth>
+					<PhysicalHeight Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="LengthUnits">METER</Unit>
+					</PhysicalHeight>
+				</AgentProperties>
+				<EnvironmentProperties>
+					<EnableSteps>false</EnableSteps>
+					<StepDurationCode Class="CodeUnitValue">
+						<Code>1.0</Code>
+						<Unit Class="TimeUnits">SECOND</Unit>
+					</StepDurationCode>
+					<SpaceType>CONTINUOUS</SpaceType>
+					<WidthCode>500</WidthCode>
+					<HeightCode>500</HeightCode>
+					<ZHeightCode>0</ZHeightCode>
+					<ColumnsCountCode>100</ColumnsCountCode>
+					<RowsCountCode>100</RowsCountCode>
+					<NeigborhoodType>MOORE</NeigborhoodType>
+					<LayoutType>USER_DEF</LayoutType>
+					<NetworkType>USER_DEF</NetworkType>
+					<ConnectionsPerAgentCode>2</ConnectionsPerAgentCode>
+					<ConnectionsRangeCode>50</ConnectionsRangeCode>
+					<NeighborLinkFractionCode>0.95</NeighborLinkFractionCode>
+					<MCode>10</MCode>
+				</EnvironmentProperties>
+				<DatasetsCreationProperties>
+					<AutoCreate>true</AutoCreate>
+					<Id>1772350822842</Id>
+					<OccurrenceAtTime>true</OccurrenceAtTime>
+					<OccurrenceDate>1772352000000</OccurrenceDate>
+					<OccurrenceTime Class="CodeUnitValue">
+						<Code>0</Code>
+						<Unit Class="TimeUnits">WEEK</Unit>
+					</OccurrenceTime>
+					<RecurrenceCode Class="CodeUnitValue">
+						<Code>1</Code>
+						<Unit Class="TimeUnits">WEEK</Unit>
+					</RecurrenceCode>
+				</DatasetsCreationProperties>
+				<ScaleRuler>
+					<Id>1772350822846</Id>
+					<Name>scale</Name>
+					<X>0</X>
+					<Y>-150</Y>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>false</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<Length>100</Length>
+					<Rotation>0</Rotation>
+					<ScaleType>BASED_ON_LENGTH</ScaleType>
+					<ModelLength>10</ModelLength>
+					<LengthUnits>METER</LengthUnits>
+					<Scale>10</Scale>
+					<InheritedFromParentAgentType>true</InheritedFromParentAgentType>
+				</ScaleRuler>
+				<CurrentLevel>1772350822849</CurrentLevel>
+				<ConnectionsId>1772350822844</ConnectionsId>
+				<Variables>
+					<Variable Class="PlainVariable">
+						<Id>1772351263973</Id>
+						<Name>inventory</Name>
+						<X>230</X>
+						<Y>40</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>initialInventory</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772351267995</Id>
+						<Name>backlog</Name>
+						<X>230</X>
+						<Y>60</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772351271158</Id>
+						<Name>incomingShipment</Name>
+						<X>230</X>
+						<Y>80</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772351274020</Id>
+						<Name>incomingOrder</Name>
+						<X>230</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772352475485</Id>
+						<Name>outgoingOrder</Name>
+						<X>230</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772352485347</Id>
+						<Name>totalCost</Name>
+						<X>410</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772353218587</Id>
+						<Name>pendingShipment</Name>
+						<X>410</X>
+						<Y>40</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772751215576</Id>
+						<Name>lastDemand</Name>
+						<X>510</X>
+						<Y>260</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772751219214</Id>
+						<Name>agentConfidence</Name>
+						<X>230</X>
+						<Y>160</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>1.0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772751270398</Id>
+						<Name>agentReasoning</Name>
+						<X>230</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>String</Type>
+							<InitialValue Class="CodeValue">
+								<Code>""</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772868703161</Id>
+						<Name>disruptionActive</Name>
+						<X>410</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+							<InitialValue Class="CodeValue">
+								<Code>false</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1772962804187</Id>
+						<Name>shipped</Name>
+						<X>410</X>
+						<Y>80</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775305780669</Id>
+						<Name>downstreamBacklog</Name>
+						<X>230</X>
+						<Y>180</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775305789940</Id>
+						<Name>downstreamInventory</Name>
+						<X>230</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775364251283</Id>
+						<Name>awaitingHumanInput</Name>
+						<X>230</X>
+						<Y>220</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>boolean</Type>
+							<InitialValue Class="CodeValue">
+								<Code>false</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775364266691</Id>
+						<Name>pendingOrder</Name>
+						<X>410</X>
+						<Y>60</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775404501395</Id>
+						<Name>systemTotalBacklog</Name>
+						<X>510</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775404509289</Id>
+						<Name>systemTotalInventory</Name>
+						<X>510</X>
+						<Y>220</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775404514997</Id>
+						<Name>systemServiceLevel</Name>
+						<X>510</X>
+						<Y>240</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>1</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775404520169</Id>
+						<Name>rlOrderInput</Name>
+						<X>410</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775404524591</Id>
+						<Name>prevOrder</Name>
+						<X>510</X>
+						<Y>280</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775405421016</Id>
+						<Name>totalShipped</Name>
+						<X>510</X>
+						<Y>300</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="PlainVariable">
+						<Id>1775405428167</Id>
+						<Name>totalReceived</Name>
+						<X>510</X>
+						<Y>320</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true"
+                  Constant="false"
+                  AccessType="public"
+                  StaticVariable="false">
+							<Type>double</Type>
+							<InitialValue Class="CodeValue">
+								<Code>0</Code>
+							</InitialValue>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772351175447</Id>
+						<Name>tierName</Name>
+						<X>60</X>
+						<Y>40</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>String</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>"Node"</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772351175445</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772351179368</Id>
+						<Name>initialInventory</Name>
+						<X>60</X>
+						<Y>60</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>24</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772351179366</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772351182893</Id>
+						<Name>leadTime</Name>
+						<X>60</X>
+						<Y>80</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>2</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772351182891</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772351185834</Id>
+						<Name>orderUpTo</Name>
+						<X>60</X>
+						<Y>100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>int</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>24</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772351185832</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772353489607</Id>
+						<Name>upstreamNode</Name>
+						<X>60</X>
+						<Y>120</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>SupplyNode</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>null</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772353489605</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772353492419</Id>
+						<Name>downstreamNode</Name>
+						<X>60</X>
+						<Y>140</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>SupplyNode</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>null</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772353492417</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772750938086</Id>
+						<Name>agentEnabled</Name>
+						<X>60</X>
+						<Y>160</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>false</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772750938084</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1772750943450</Id>
+						<Name>agentScriptPath</Name>
+						<X>60</X>
+						<Y>180</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>String</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>"C:/Users/okech/Models/DigitalTwin/agent/agent.py"</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1772750943448</Id>
+								<EditorContolType>TEXT_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1775305736911</Id>
+						<Name>informationSharing</Name>
+						<X>60</X>
+						<Y>200</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>false</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1775305736909</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1775367226328</Id>
+						<Name>hitlEnabled</Name>
+						<X>60</X>
+						<Y>220</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>false</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1775367226326</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+					<Variable Class="Parameter">
+						<Id>1775759480913</Id>
+						<Name>rlEnabled</Name>
+						<X>60</X>
+						<Y>240</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+							<Type>boolean</Type>
+							<UnitType>NONE</UnitType>
+							<SdArray>false</SdArray>
+							<DefaultValue Class="CodeValue">
+								<Code>false</Code>
+							</DefaultValue>
+							<ParameterEditor>
+								<Id>1775759480911</Id>
+								<EditorContolType>CHECK_BOX</EditorContolType>
+								<MinSliderValue>0</MinSliderValue>
+								<MaxSliderValue>100</MaxSliderValue>
+								<DelimeterType>NO_DELIMETER</DelimeterType>
+							</ParameterEditor>
+						</Properties>
+					</Variable>
+				</Variables>
+				<Events>
+					<Event>
+						<Id>1772359623117</Id>
+						<Name>orderCycle</Name>
+						<X>260</X>
+						<Y>540</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Properties TriggerType="timeout" Mode="cyclic">
+							<Timeout Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</Timeout>
+							<Rate Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="RateUnits">PER_WEEK</Unit>
+							</Rate>
+							<Id>1772359623115</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772438400000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0.1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+							<Condition>false</Condition>
+						</Properties>
+						<Action>// Step 1: Fulfil what was ordered last period&#xD;
+double demand = incomingOrder + backlog;&#xD;
+&#xD;
+shipped = Math.min(demand, inventory);&#xD;
+&#xD;
+inventory -= shipped;&#xD;
+&#xD;
+backlog = Math.max(0, demand - shipped);&#xD;
+&#xD;
+// Step 2: Forward shipment downstream with lead time delay&#xD;
+traceln("[" + tierName + "] Step 2 started. shipped = " + shipped +&#xD;
+        ", downstreamNode = " + (downstreamNode != null ? "EXISTS" : "NULL"));&#xD;
+&#xD;
+if (downstreamNode != null) {&#xD;
+    double actualShipped;&#xD;
+&#xD;
+    if (tierName.equals("Manufacturer") &amp;&amp;&#xD;
+        ((Main)getOwner()).demandScenario == 2 &amp;&amp;&#xD;
+        time() &gt;= 40 &amp;&amp; time() &lt;= 50) {&#xD;
+        actualShipped = shipped * 0.2;&#xD;
+        traceln("[Manufacturer] DISRUPTION ACTIVE — shipping only "&#xD;
+         + actualShipped + " of " + shipped + " requested");&#xD;
+    } else {&#xD;
+        actualShipped = shipped;&#xD;
+    }&#xD;
+&#xD;
+    traceln("[" + tierName + "] Calling create_deliveryShipment with " &#xD;
+    + actualShipped + " units, leadTime = " + leadTime);&#xD;
+    traceln("[" + tierName + "] leadTime = " + leadTime);&#xD;
+&#xD;
+    downstreamNode.create_deliveryShipment(leadTime, actualShipped);&#xD;
+    traceln("[" + tierName + "] Shipment scheduled successfully");&#xD;
+&#xD;
+} else {&#xD;
+    traceln("[" + tierName + "] WARNING: downstreamNode is NULL — cannot ship");&#xD;
+}&#xD;
+&#xD;
+// Step 3: Refresh downstream state for information sharing&#xD;
+if (downstreamNode != null) {&#xD;
+    downstreamInventory = downstreamNode.inventory;&#xD;
+    downstreamBacklog   = downstreamNode.backlog;&#xD;
+} else {&#xD;
+    downstreamInventory = 0;&#xD;
+    downstreamBacklog   = 0;&#xD;
+}&#xD;
+&#xD;
+// Step 4: Calculate and place replenishment order upstream&#xD;
+if (agentEnabled) {&#xD;
+&#xD;
+    try {&#xD;
+        String stateDir = agentScriptPath.replace("agent.py", "");&#xD;
+        String statePath = stateDir + "state_" + tierName + ".json";&#xD;
+        &#xD;
+        String stateJson = "{"&#xD;
+            + "\"tier\":\"" + tierName + "\","&#xD;
+            + "\"inventory\":" + inventory + ","&#xD;
+            + "\"backlog\":" + backlog + ","&#xD;
+            + "\"orderUpTo\":" + orderUpTo + ","&#xD;
+            + "\"simTime\":" + time() + ","&#xD;
+            + "\"lastDemand\":" + lastDemand + ","&#xD;
+            + "\"leadTime\":" + leadTime + ","&#xD;
+            + "\"downstreamInventory\":" + downstreamInventory + ","&#xD;
+            + "\"downstreamBacklog\":" + downstreamBacklog + ","&#xD;
+            + "\"informationSharing\":" + informationSharing&#xD;
+            + "}";&#xD;
+        &#xD;
+        java.io.FileWriter fw = new java.io.FileWriter(statePath);&#xD;
+        fw.write(stateJson);&#xD;
+        fw.close();&#xD;
+        traceln("[" + tierName + "] Wrote state: inv=" + inventory + " back=" + backlog + " time=" + time());&#xD;
+    } catch (Exception e) {&#xD;
+        traceln("[" + tierName + "] Error writing state: " + e.getMessage());&#xD;
+    }&#xD;
+    &#xD;
+   // ========== HYBRID MODE ==========&#xD;
+	if (rlEnabled) {&#xD;
+	    double rlOrder = 0;&#xD;
+	    double rlConfidence = 0;&#xD;
+	    String rlReasoning = "";&#xD;
+	&#xD;
+	    try {&#xD;
+	        rlOrder      = callRLAgent();&#xD;
+	        rlConfidence = agentConfidence;&#xD;
+	        rlReasoning  = agentReasoning;&#xD;
+	        traceln("[" + tierName + "] RL DECIDES: order=" + rlOrder + " conf=" + rlConfidence);&#xD;
+	    } catch (Exception e) {&#xD;
+	        traceln("[" + tierName + "] RL not available: " + e.getMessage());&#xD;
+	        rlOrder = Math.max(0, orderUpTo - (inventory - backlog));&#xD;
+	        rlConfidence = 0.0;  // Explicitly set to indicate fallback&#xD;
+    		rlReasoning = "Fallback to rule-based due to RL error";&#xD;
+	    }&#xD;
+	&#xD;
+	    // RL order capped at tier-specific orderUpTo&#xD;
+	    outgoingOrder = Math.min(rlOrder, orderUpTo);&#xD;
+	&#xD;
+	    // LLM provides reasoning only&#xD;
+	    try {&#xD;
+	        callLLMAgent(rlOrder, rlReasoning, rlConfidence);&#xD;
+	        traceln("[" + tierName + "] LLM EXPLAINS: " + agentReasoning);&#xD;
+	    } catch (Exception e) {&#xD;
+	        traceln("[" + tierName + "] LLM explanation unavailable: " + e.getMessage());&#xD;
+	    }&#xD;
+	&#xD;
+	} else {&#xD;
+	    // LLM only (A2/A3)&#xD;
+	    outgoingOrder = callLLMAgent(0, "", 0);&#xD;
+	    outgoingOrder = Math.min(outgoingOrder, orderUpTo);&#xD;
+	}&#xD;
+	// ========== END HYBRID MODE ==========&#xD;
+	&#xD;
+	// Remove the low confidence fallback entirely for A4&#xD;
+	// Keep only for A2/A3 (non-RL)&#xD;
+	if (!rlEnabled &amp;&amp; agentConfidence &lt; 0.70) {&#xD;
+	    double inventoryPosition = inventory - backlog;&#xD;
+	    outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);&#xD;
+	    outgoingOrder = Math.min(outgoingOrder, orderUpTo);&#xD;
+	    traceln("[" + tierName + "] LOW CONFIDENCE (" + agentConfidence +&#xD;
+	            ") — rule-based fallback: " + outgoingOrder);&#xD;
+	}&#xD;
+    &#xD;
+    // HITL — pause for human review if enabled&#xD;
+    Main main = (Main) getOwner();&#xD;
+    boolean crisisDetected = (backlog &gt; main.crisisBacklogThreshold &amp;&amp; inventory == 0);&#xD;
+    if (hitlEnabled &amp;&amp; (agentConfidence &lt; 0.85 || crisisDetected)) {&#xD;
+        pendingOrder        = outgoingOrder;&#xD;
+        awaitingHumanInput  = true;&#xD;
+		&#xD;
+		&#xD;
+        main.hitlTierName      = tierName;&#xD;
+        main.hitlInventory     = inventory;&#xD;
+        main.hitlBacklog       = backlog;&#xD;
+        main.hitlSuggestedOrder = outgoingOrder;&#xD;
+        main.hitlConfidence    = agentConfidence;&#xD;
+        main.hitlReasoning     = agentReasoning;&#xD;
+        main.hitlWeek          = time();&#xD;
+        main.hitlHumanOrder    = outgoingOrder;&#xD;
+        main.humanDecisionAccept = false;&#xD;
+&#xD;
+        traceln("[HITL] Pausing at " + tierName +&#xD;
+                " | week=" + (int)time() +&#xD;
+                " | confidence=" + agentConfidence +&#xD;
+                " | crisis=" + crisisDetected +&#xD;
+                " | suggested=" + outgoingOrder);&#xD;
+                &#xD;
+		main.humanDecisionAccept = false;&#xD;
+        getEngine().pause();&#xD;
+        return;&#xD;
+    }&#xD;
+&#xD;
+} else if(!agentEnabled) {&#xD;
+        // Original rule-based (no information sharing)&#xD;
+        double inventoryPosition = inventory - backlog;&#xD;
+        outgoingOrder = Math.max(0, orderUpTo - inventoryPosition);&#xD;
+        outgoingOrder = Math.min(outgoingOrder, orderUpTo);&#xD;
+ }&#xD;
+&#xD;
+&#xD;
+if (upstreamNode != null) {&#xD;
+    upstreamNode.receiveOrder(outgoingOrder);&#xD;
+}&#xD;
+&#xD;
+if (upstreamNode == null) {&#xD;
+    create_deliveryShipment(leadTime, outgoingOrder);&#xD;
+    traceln("[" + tierName + "] Ordered " + outgoingOrder +&#xD;
+            " from external source — arriving in " + leadTime + " weeks");&#xD;
+}&#xD;
+&#xD;
+// Step 4: Accumulate cost&#xD;
+totalCost += 0.5 * Math.max(0, inventory) + 1.0 * Math.max(0, backlog);&#xD;
+&#xD;
+// Step 5: Log datasets&#xD;
+inventoryData.add(time(), inventory);&#xD;
+backlogData.add(time(), backlog);&#xD;
+orderData.add(time(), outgoingOrder);&#xD;
+shippedData.add(time(), shipped);&#xD;
+incomingOrderData.add(time(), incomingOrder);</Action>
+						<Logging>false</Logging>
+					</Event>
+				</Events>
+				<DynamicEvents>
+					<DynamicEventClass>
+						<Id>1772353248589</Id>
+						<Name>deliveryShipment</Name>
+						<X>260</X>
+						<Y>490</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>amount</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Action>// Debug — see when deliveries actually arrive&#xD;
+traceln("🚚 DELIVERY ARRIVING at " + this.tierName + &#xD;
+        " time=" + time() + " amount=" + amount);&#xD;
+&#xD;
+// Actually deliver the goods&#xD;
+receiveShipment(amount);&#xD;
+&#xD;
+// Show result&#xD;
+traceln("   After: inventory=" + inventory + " backlog=" + backlog);</Action>
+					</DynamicEventClass>
+				</DynamicEvents>
+				<Functions>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772352191162</Id>
+						<Name>receiveOrder</Name>
+						<X>60</X>
+						<Y>500</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>amount</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>incomingOrder = amount;&#xD;
+&#xD;
+</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>VOID</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772353228374</Id>
+						<Name>receiveShipment</Name>
+						<X>60</X>
+						<Y>520</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>amount</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>// Receive incoming stock&#xD;
+inventory += amount;&#xD;
+&#xD;
+// Calculate total demand to fulfil&#xD;
+double demand = incomingOrder + backlog;&#xD;
+&#xD;
+// Ship what you can&#xD;
+double shipped = Math.min(demand, inventory);&#xD;
+inventory -= shipped;&#xD;
+&#xD;
+// Whatever couldn't be shipped becomes backlog&#xD;
+backlog = Math.max(0, demand - shipped);&#xD;
+&#xD;
+incomingOrder = 0;&#xD;
+&#xD;
+// Forward shipment downstream&#xD;
+if (downstreamNode != null) {&#xD;
+    downstreamNode.receiveShipment(shipped);&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772751311292</Id>
+						<Name>callLLMAgent</Name>
+						<X>60</X>
+						<Y>540</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>rlOrder</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Parameter>
+							<Name>rlReasoning</Name>
+							<Type>String</Type>
+						</Parameter>
+						<Parameter>
+							<Name>rlConfidence</Name>
+							<Type>double</Type>
+						</Parameter>
+						<Body>// ── Write state.json for Python ───────────────────────────&#xD;
+&#xD;
+traceln("[" + tierName + "] ====== callLLMAgent START =====");&#xD;
+    traceln("[" + tierName + "] DEBUG: rlOrder received = " + rlOrder);&#xD;
+    traceln("[" + tierName + "] DEBUG: rlConfidence received = " + rlConfidence);&#xD;
+    traceln("[" + tierName + "] DEBUG: rlReasoning received = " + rlReasoning);&#xD;
+    &#xD;
+    &#xD;
+String stateDir = agentScriptPath.replace("agent.py", "");&#xD;
+String responsePath = stateDir + "response_" + tierName + ".json";&#xD;
+String logPath = stateDir + "log_LLM" + tierName + ".txt";&#xD;
+&#xD;
+try {&#xD;
+&#xD;
+    // ========== WRITE RL POLICY FILE (ONLY IF RL ORDER &gt; 0) ==========&#xD;
+    if (rlOrder &gt; 0) {&#xD;
+        String rlPolicyPath = stateDir + "rl_policy_" + tierName + ".json";        &#xD;
+        String rlPolicyJson = "{"&#xD;
+		    + "\"rl_order\":" + rlOrder + ","&#xD;
+		    + "\"rl_confidence\":" + rlConfidence + ","&#xD;
+		    + "\"rl_reasoning\":\"" + rlReasoning + "\""&#xD;
+		    + "}";&#xD;
+        java.io.FileWriter rlFw = new java.io.FileWriter(rlPolicyPath);&#xD;
+        rlFw.write(rlPolicyJson);&#xD;
+        rlFw.close();&#xD;
+        traceln("[" + tierName + "] Wrote RL policy file: " + rlPolicyPath);&#xD;
+    }&#xD;
+    &#xD;
+    // Call Python script FIRST (without writing state)&#xD;
+    ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath, tierName);&#xD;
+    pb.redirectOutput(new java.io.File(logPath));&#xD;
+    pb.redirectErrorStream(true);&#xD;
+    Process process = pb.start();&#xD;
+&#xD;
+   &#xD;
+    try {&#xD;
+    java.nio.file.Path lp = java.nio.file.Paths.get(logPath);&#xD;
+    String logContent = new String(java.nio.file.Files.readAllBytes(lp));&#xD;
+	    if (logContent.trim().length() &gt; 0) {&#xD;
+	        traceln("[" + tierName + "] Python: " + logContent.trim());&#xD;
+	    }&#xD;
+	} catch (Exception logEx) {&#xD;
+	    /* not critical */&#xD;
+	}&#xD;
+&#xD;
+    // Wait up to 10 seconds for response&#xD;
+    boolean finished = process.waitFor(10, java.util.concurrent.TimeUnit.SECONDS);&#xD;
+&#xD;
+    // Always print Python output for debugging&#xD;
+    //if (pythonOutput.length() &gt; 0) {&#xD;
+        //traceln("[" + tierName + "] Python: " + pythonOutput.toString().trim());&#xD;
+    //}&#xD;
+&#xD;
+    if (!finished) {&#xD;
+        traceln("[" + tierName + "] WARNING: Python timed out — rule-based fallback");&#xD;
+        process.destroyForcibly();&#xD;
+        double inventoryPosition = inventory - backlog;&#xD;
+        return Math.max(0, orderUpTo - inventoryPosition);&#xD;
+    }&#xD;
+&#xD;
+    // Check response file exists&#xD;
+    java.io.File responseFile = new java.io.File(responsePath);&#xD;
+    if (!responseFile.exists()) {&#xD;
+        traceln("[" + tierName + "] WARNING: No response file — rule-based fallback");&#xD;
+        double inventoryPosition = inventory - backlog;&#xD;
+        return Math.max(0, orderUpTo - inventoryPosition);&#xD;
+    }&#xD;
+&#xD;
+    // Read response file&#xD;
+    java.nio.file.Path rPath = java.nio.file.Paths.get(responsePath);&#xD;
+    String responseJson = new String(java.nio.file.Files.readAllBytes(rPath));&#xD;
+&#xD;
+    // Parse response&#xD;
+    agentConfidence = parseJsonDouble(responseJson, "confidence");&#xD;
+    agentReasoning  = parseJsonString(responseJson, "reasoning");&#xD;
+    double orderQty = parseJsonDouble(responseJson, "order_quantity");&#xD;
+&#xD;
+    traceln("[" + tierName + "] t=" + time() +&#xD;
+            " → LLM order=" + orderQty +&#xD;
+            " confidence=" + agentConfidence +&#xD;
+            " | " + agentReasoning);&#xD;
+&#xD;
+    return Math.max(0, orderQty);&#xD;
+&#xD;
+} catch (Exception e) {&#xD;
+    traceln("[" + tierName + "] ERROR: " + e.getMessage());&#xD;
+    return Math.max(0, orderUpTo - (inventory - backlog));&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1772751764897</Id>
+						<Name>parseJsonDouble</Name>
+						<X>60</X>
+						<Y>480</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>json</Name>
+							<Type>String</Type>
+						</Parameter>
+						<Parameter>
+							<Name>key</Name>
+							<Type>String</Type>
+						</Parameter>
+						<Body>try {&#xD;
+    String search = "\"" + key + "\":";&#xD;
+    int idx = json.indexOf(search);&#xD;
+    if (idx == -1) return 0.0;&#xD;
+    int start = idx + search.length();&#xD;
+    int end = json.indexOf(",", start);&#xD;
+    if (end == -1) end = json.indexOf("}", start);&#xD;
+    return Double.parseDouble(json.substring(start, end).trim());&#xD;
+} catch (Exception e) {&#xD;
+    return 0.0;&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>String</ReturnType>
+						<Id>1772751770055</Id>
+						<Name>parseJsonString</Name>
+						<X>60</X>
+						<Y>460</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Parameter>
+							<Name>json</Name>
+							<Type>String</Type>
+						</Parameter>
+						<Parameter>
+							<Name>key</Name>
+							<Type>String</Type>
+						</Parameter>
+						<Body>try {&#xD;
+    String search = "\"" + key + "\":\"";&#xD;
+    int idx = json.indexOf(search);&#xD;
+    if (idx == -1) return "";&#xD;
+    int start = idx + search.length();&#xD;
+    int end = json.indexOf("\"", start);&#xD;
+    return json.substring(start, end);&#xD;
+} catch (Exception e) {&#xD;
+    return "";&#xD;
+}</Body>
+					</Function>
+					<Function AccessType="default" StaticFunction="false">
+						<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+						<ReturnType>double</ReturnType>
+						<Id>1775404722808</Id>
+						<Name>callRLAgent</Name>
+						<X>60</X>
+						<Y>560</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<Body>// ── callRLAgent() — Add this function to SupplyNode&#xD;
+// ───────────────────────&#xD;
+// Called from orderCycle when autonomyCondition == 4&#xD;
+&#xD;
+// Delete prev files at start of new episode&#xD;
+&#xD;
+// ── Write tier-specific state file for RL agent&#xD;
+// ───────────────────────────&#xD;
+String stateDir = agentScriptPath.replace("agent.py", "");&#xD;
+String rlStatePath = stateDir + "state_rl_" + tierName + ".json";&#xD;
+String rlRespPath = stateDir + "response_rl_" + tierName + ".json";&#xD;
+String rlLogPath = stateDir + "log_rl_" + tierName + ".txt";&#xD;
+&#xD;
+if (time() &lt; 1.0) {&#xD;
+	new java.io.File(&#xD;
+			stateDir + "prev_rl_" + tierName + ".json")&#xD;
+			.delete();&#xD;
+}&#xD;
+		&#xD;
+String rlStateJson = "{"&#xD;
+    + "\"tier\":\"" + tierName + "\","&#xD;
+    + "\"inventory\":" + inventory + ","&#xD;
+    + "\"backlog\":" + backlog + ","&#xD;
+    + "\"downstreamInventory\":" + downstreamInventory + ","&#xD;
+    + "\"downstreamBacklog\":" + downstreamBacklog + ","&#xD;
+    + "\"retailerInventory\":" + ((Main)getOwner()).retailer.inventory + ","&#xD;
+    + "\"retailerBacklog\":" + ((Main)getOwner()).retailer.backlog + ","&#xD;
+    + "\"distributorInventory\":" + ((Main)getOwner()).distributor.inventory + ","&#xD;
+    + "\"distributorBacklog\":" + ((Main)getOwner()).distributor.backlog + ","&#xD;
+    + "\"manufacturerInventory\":" + ((Main)getOwner()).manufacturer.inventory + ","&#xD;
+    + "\"manufacturerBacklog\":" + ((Main)getOwner()).manufacturer.backlog + ","&#xD;
+    + "\"demandScenario\":" + ((Main)getOwner()).demandScenario + ","&#xD;
+    + "\"simTime\":" + time()&#xD;
+    + "}";&#xD;
+&#xD;
+try {&#xD;
+	// Write RL state file&#xD;
+	java.io.FileWriter fw = new java.io.FileWriter(rlStatePath);&#xD;
+	fw.write(rlStateJson);&#xD;
+	fw.close();&#xD;
+&#xD;
+	// Call RL agent script&#xD;
+	ProcessBuilder pb = new ProcessBuilder("python", agentScriptPath.replace("agent.py",&#xD;
+					"rl_inference_file.py"),tierName);&#xD;
+	pb.redirectOutput(new java.io.File(rlLogPath));&#xD;
+	pb.redirectErrorStream(true);&#xD;
+	Process process = pb.start();&#xD;
+&#xD;
+	boolean finished = process.waitFor(30, java.util.concurrent.TimeUnit.SECONDS);&#xD;
+&#xD;
+	if (!finished) {&#xD;
+		traceln("[" + tierName+ "] RL agent timed out — rule-based fallback");&#xD;
+		process.destroyForcibly();&#xD;
+		double inventoryPosition = inventory - backlog;&#xD;
+		return Math.max(0, orderUpTo - inventoryPosition);&#xD;
+	}&#xD;
+&#xD;
+	// Read log&#xD;
+	try {&#xD;
+		java.nio.file.Path lp = java.nio.file.Paths.get(rlLogPath);&#xD;
+		String logContent = new String(java.nio.file.Files.readAllBytes(lp));&#xD;
+		if (logContent.trim().length() &gt; 0) {&#xD;
+			traceln("[" + tierName + "] " + logContent.trim());&#xD;
+		}&#xD;
+	} catch (Exception logEx) {&#xD;
+		/* not critical */ }&#xD;
+&#xD;
+	// Check response file&#xD;
+	if (!new java.io.File(rlRespPath).exists()) {&#xD;
+		traceln("[" + tierName&#xD;
+				+ "] RL response not found — rule-based fallback");&#xD;
+		double inventoryPosition = inventory - backlog;&#xD;
+		return Math.max(0, orderUpTo - inventoryPosition);&#xD;
+	}&#xD;
+&#xD;
+	// Read response&#xD;
+	java.nio.file.Path rp = java.nio.file.Paths.get(rlRespPath);&#xD;
+	String responseJson = new String(java.nio.file.Files.readAllBytes(rp));&#xD;
+&#xD;
+	agentConfidence = parseJsonDouble(responseJson,"confidence");&#xD;
+	agentReasoning = parseJsonString(responseJson,"reasoning");&#xD;
+	double orderQty = parseJsonDouble(responseJson,"order_quantity");&#xD;
+&#xD;
+	traceln("[" + tierName + "] t=" + time()&#xD;
+			+ " -&gt; RL order=" + orderQty + " confidence="&#xD;
+			+ agentConfidence + " | " + agentReasoning);&#xD;
+&#xD;
+	return Math.max(0, orderQty);&#xD;
+&#xD;
+} catch (Exception e) {&#xD;
+	traceln("[" + tierName + "] ERROR calling RL agent: " + e.getMessage());&#xD;
+	double ip = inventory - backlog;&#xD;
+	return Math.max(0, orderUpTo - ip);&#xD;
+}</Body>
+					</Function>
+				</Functions>
+				<AnalysisData>
+					<DataSet>
+						<Id>1772525593990</Id>
+						<Name>inventoryData</Name>
+						<X>60</X>
+						<Y>310</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772525593988</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772611200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1772526114097</Id>
+						<Name>backlogData</Name>
+						<X>60</X>
+						<Y>330</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772526114095</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772611200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1772526129450</Id>
+						<Name>orderData</Name>
+						<X>60</X>
+						<Y>350</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772526129448</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1772611200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1772961685980</Id>
+						<Name>shippedData</Name>
+						<X>60</X>
+						<Y>370</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772961685978</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1773043200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+					<DataSet>
+						<Id>1772961701352</Id>
+						<Name>incomingOrderData</Name>
+						<X>60</X>
+						<Y>390</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<AutoUpdate>false</AutoUpdate>
+						<RecurrenceProperties>
+							<Id>1772961701350</Id>
+							<OccurrenceAtTime>true</OccurrenceAtTime>
+							<OccurrenceDate>1773043200000</OccurrenceDate>
+							<OccurrenceTime Class="CodeUnitValue">
+								<Code>0</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</OccurrenceTime>
+							<RecurrenceCode Class="CodeUnitValue">
+								<Code>1</Code>
+								<Unit Class="TimeUnits">WEEK</Unit>
+							</RecurrenceCode>
+						</RecurrenceProperties>
+						<Logging>false</Logging>
+						<FreezeXAxis>true</FreezeXAxis>
+						<SamplesToKeep>200</SamplesToKeep>
+					</DataSet>
+				</AnalysisData>
+				<AgentLinks>
+					<AgentLink>
+						<Id>1772350822844</Id>
+						<Name>connections</Name>
+						<ExcludeFromBuild>true</ExcludeFromBuild>
+						<X>50</X>
+						<Y>-50</Y>
+						<Label>
+							<X>15</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<HandleReceiveInConnections>false</HandleReceiveInConnections>
+						<AgentLinkType>COLLECTION_OF_LINKS</AgentLinkType>
+						<AgentLinkBidirectional>true</AgentLinkBidirectional>
+						<MessageType>Object</MessageType>
+						<LineStyle>SOLID</LineStyle>
+						<LineWidth>1</LineWidth>
+						<LineColor>-16777216</LineColor>
+						<LineZOrder>UNDER_AGENTS</LineZOrder>
+						<LineArrow>NONE</LineArrow>
+						<LineArrowPosition>END</LineArrowPosition>
+					</AgentLink>
+				</AgentLinks>
+				<ContainerLinks>
+					<ContainerLink>
+						<Id>1772353749712</Id>
+						<Name>main</Name>
+						<X>50</X>
+						<Y>-100</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>false</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>true</ShowLabel>
+						<ActiveObjectClass>
+							<PackageName>supplychaindigitaltwin</PackageName>
+							<ClassName>Main</ClassName>
+						</ActiveObjectClass>
+					</ContainerLink>
+				</ContainerLinks>
+				<Presentation>
+					<Level>
+						<Id>1772350822849</Id>
+						<Name>level</Name>
+						<X>0</X>
+						<Y>0</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<Z>0</Z>
+						<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
+					</Level>
+				</Presentation>
+			</ActiveObjectClass>
+		</ActiveObjectClasses>
+		<DifferentialEquationsMethod>EULER</DifferentialEquationsMethod>
+		<MixedEquationsMethod>RK45_NEWTON</MixedEquationsMethod>
+		<AlgebraicEquationsMethod>MODIFIED_NEWTON</AlgebraicEquationsMethod>
+		<AbsoluteAccuracy>1.0E-5</AbsoluteAccuracy>
+		<FixedTimeStep>0.001</FixedTimeStep>
+		<RelativeAccuracy>1.0E-5</RelativeAccuracy>
+		<TimeAccuracy>1.0E-5</TimeAccuracy>
+		<InspectionWindowColorTheme>DEFAULT</InspectionWindowColorTheme>
+		<Frame>
+			<Id>1772350491140</Id>
+			<Width>1880</Width>
+			<Height>1010</Height>
+		</Frame>
+		<Database>
+			<Id>1772350491139</Id>
+			<Logging>true</Logging>
+			<AutoExport>false</AutoExport>
+			<ShutdownCompact>true</ShutdownCompact>
+			<ImportSettings/>
+			<ExportSettings/>
+		</Database>
+		<RunConfiguration ActiveObjectClassId="1772350491142">
+			<Id>1772350491153</Id>
+			<Name>RunConfiguration</Name>
+			<MaximumMemory>512</MaximumMemory>
+			<ModelTimeProperties>
+				<StopOption>Stop at specified time</StopOption>
+				<InitialDate>1772323200000</InitialDate>
+				<InitialTime>0.0</InitialTime>
+				<FinalDate>1775001600000</FinalDate>
+				<FinalTime>100.0</FinalTime>
+			</ModelTimeProperties>
+			<AnimationProperties>
+				<StopNever>true</StopNever>
+				<ExecutionMode>realTimeScaled</ExecutionMode>
+				<RealTimeScale>1.0</RealTimeScale>
+				<EnableZoomAndPanning>true</EnableZoomAndPanning>
+				<EnableDeveloperPanel>false</EnableDeveloperPanel>
+				<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+			</AnimationProperties>
+			<Inputs/>
+			<Outputs/>
+		</RunConfiguration>
+		<RequiredLibraryReference>
+			<LibraryName>com.anylogic.libraries.modules.markup_descriptors</LibraryName>
+			<VersionMajor>1</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<VersionBuild>0</VersionBuild>
+		</RequiredLibraryReference>
+		<RequiredLibraryReference>
+			<LibraryName>com.anylogic.libraries.processmodeling</LibraryName>
+			<VersionMajor>8</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<VersionBuild>5</VersionBuild>
+		</RequiredLibraryReference>
+		<RequiredLibraryReference>
+			<LibraryName>com.anylogic.libraries.processmodeling</LibraryName>
+			<VersionMajor>8</VersionMajor>
+			<VersionMinor>0</VersionMinor>
+			<VersionBuild>5</VersionBuild>
+		</RequiredLibraryReference>
+		<ClassPathEntry>
+			<ResourceReference>
+				<PackageName>supplychaindigitaltwin</PackageName>
+				<ClassName>py4j0.10.7.jar</ClassName>
+			</ResourceReference>
+			<Imported>true</Imported>
+			<Folder>false</Folder>
+		</ClassPathEntry>
+		<ModelResources>
+			<Resource>
+				<Id>1775403274608</Id>
+				<Path>py4j0.10.7.jar</Path>
+				<ReferencedFromUserCode>false</ReferencedFromUserCode>
+				<Location>FILE_SYSTEM</Location>
+			</Resource>
+		</ModelResources>
+		<Experiments>
+			<SimulationExperiment ActiveObjectClassId="1772350491142">
+				<Id>1772350491150</Id>
+				<Name>Simulation</Name>
+				<CommandLineArguments/>
+				<MaximumMemory>512</MaximumMemory>
+				<RandomNumberGenerationType>fixedSeed</RandomNumberGenerationType>
+				<CustomGeneratorCode>new Random()</CustomGeneratorCode>
+				<SeedValue>1</SeedValue>
+				<SelectionModeForSimultaneousEvents>LIFO</SelectionModeForSimultaneousEvents>
+				<VmArgs/>
+				<LoadRootFromSnapshot>false</LoadRootFromSnapshot>
+				<Presentation>
+					<Text>
+						<Id>1772350491152</Id>
+						<Name>text</Name>
+						<X>50</X>
+						<Y>30</Y>
+						<Label>
+							<X>10</X>
+							<Y>0</Y>
+						</Label>
+						<PublicFlag>true</PublicFlag>
+						<PresentationFlag>true</PresentationFlag>
+						<ShowLabel>false</ShowLabel>
+						<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+						<EmbeddedIcon>false</EmbeddedIcon>
+						<Z>0</Z>
+						<Rotation>0.0</Rotation>
+						<Color>-12490271</Color>
+						<Text>SupplyChainDigitalTwin</Text>
+						<Font>
+							<Name>SansSerif</Name>
+							<Size>24</Size>
+							<Style>0</Style>
+						</Font>
+						<Alignment>LEFT</Alignment>
+					</Text>
+				</Presentation>
+				<Parameters>
+					<Parameter>
+						<ParameterName>demandScenario</ParameterName>
+					</Parameter>
+					<Parameter>
+						<ParameterName>autonomyCondition</ParameterName>
+					</Parameter>
+					<Parameter>
+						<ParameterName>replicationNumber</ParameterName>
+					</Parameter>
+					<Parameter>
+						<ParameterName>crisisBacklogThreshold</ParameterName>
+					</Parameter>
+				</Parameters>
+				<PresentationProperties>
+					<EnableZoomAndPanning>true</EnableZoomAndPanning>
+					<ExecutionMode>realTimeScaled</ExecutionMode>
+					<Title>SupplyChainDigitalTwin : Simulation</Title>
+					<EnableDeveloperPanel>true</EnableDeveloperPanel>
+					<ShowDeveloperPanelOnStart>false</ShowDeveloperPanelOnStart>
+					<RealTimeScale>1.0</RealTimeScale>
+				</PresentationProperties>
+				<ModelTimeProperties>
+					<StopOption>Never</StopOption>
+					<InitialDate>1772323200000</InitialDate>
+					<InitialTime>0.0</InitialTime>
+					<FinalDate>1775001600000</FinalDate>
+					<FinalTime>100.0</FinalTime>
+				</ModelTimeProperties>
+				<BypassInitialScreen>true</BypassInitialScreen>
+			</SimulationExperiment>
+		</Experiments>
+	</Model>
+	<ConvertersApplied>
+		<Uuid>9f7858c9-b2c8-4ead-9244-fd08833f642b</Uuid>
+		<Uuid>404652e6-561a-404c-aab2-ab7415f40ef5</Uuid>
+		<Uuid>6fd6cd57-6dfe-4fc6-be0b-c74065351957</Uuid>
+		<Uuid>3325dc48-3ad4-41e3-836f-dfd0e98fe1ed</Uuid>
+		<Uuid>bb27038a-0f3a-48bb-b235-4a44066a14aa</Uuid>
+		<Uuid>3f69ef3d-706e-41a6-8af0-11658c5eef68</Uuid>
+		<Uuid>3f6fe405-e047-4304-91d6-6eee206d1106</Uuid>
+		<Uuid>820d2b51-5b4a-48e7-b0b6-e46418e3c0f2</Uuid>
+		<Uuid>630818fa-8975-4b70-976f-03180dce01db</Uuid>
+		<Uuid>7c7e471c-004e-495e-a4ad-d840620ab38e</Uuid>
+		<Uuid>3e38ff63-1f70-4ec0-b42c-e879b146785d</Uuid>
+		<Uuid>b1eb86e4-14b3-405c-8257-56b80f1b485d</Uuid>
+		<Uuid>d55f9fb6-86bb-45ea-9db1-79cecfa0ce91</Uuid>
+		<Uuid>ab77aafd-8f02-4354-b789-928d45b1f73c</Uuid>
+		<Uuid>e4f14fd7-1c4a-42e9-b91d-db2415f475db</Uuid>
+		<Uuid>6d208120-6c7a-45a6-b411-402f18890d9b</Uuid>
+		<Uuid>1816cdd0-177c-4973-9e88-dd8b95318556</Uuid>
+		<Uuid>5c23f62f-06dc-46ad-8ead-688ec434e3e5</Uuid>
+		<Uuid>5c7d7990-3f35-41eb-ae16-d0c16098acc6</Uuid>
+		<Uuid>02a16c52-a834-4f30-b6af-a6aee51a294e</Uuid>
+		<Uuid>f0988929-2718-4984-a1b6-c1f2ce152f1f</Uuid>
+		<Uuid>1c9d9cfe-ea2b-43f9-8f62-dc31d8ed3ae1</Uuid>
+		<Uuid>34cb742a-8ba4-47a7-87e6-f2685fe69e97</Uuid>
+		<Uuid>4fe10751-c399-4752-94b7-30113ad45070</Uuid>
+		<Uuid>c13fe5ac-6466-446e-886a-12df1431b1eb</Uuid>
+		<Uuid>714f9ca2-426e-4bff-8569-2d18f58fdcf8</Uuid>
+		<Uuid>045aeb5f-1087-4ac7-9702-a49404e7f7e8</Uuid>
+		<Uuid>840e9a0a-de98-4b7d-a172-f9bbda2d6b98</Uuid>
+		<Uuid>e342358b-75ed-4812-9376-6043fb6cb473</Uuid>
+		<Uuid>f3d5ccdc-1bb3-466f-871d-f6b92a26cbb4</Uuid>
+		<Uuid>59acb6fb-561c-4038-b722-a596a748b3c7</Uuid>
+		<Uuid>be7e6726-05c0-4228-821d-a8df91aeb5bc</Uuid>
+		<Uuid>df4a6a60-9ce8-4c6c-91c0-ad5a5d732259</Uuid>
+		<Uuid>47491eb9-4606-42bd-8399-125a2b95fded</Uuid>
+		<Uuid>9b2d1306-5d19-439a-8f2c-b144dd7e22fa</Uuid>
+		<Uuid>ef421152-8732-4f97-9acb-c8e9a6890d5e</Uuid>
+		<Uuid>d48f8080-25b1-44f5-8322-7bf2712ff974</Uuid>
+		<Uuid>6c4de826-daad-4cd4-b703-51dfe803e822</Uuid>
+		<Uuid>01af22d6-6889-4e98-a3df-e6eddc40fc92</Uuid>
+		<Uuid>ea3b3dbe-cca2-4bde-957b-feaef7e18789</Uuid>
+		<Uuid>e737c8c6-b526-4f88-b89e-554e205b0614</Uuid>
+		<Uuid>efd24e87-d7f7-425f-9cb0-3ee17c7b2116</Uuid>
+		<Uuid>a62607e6-047e-4910-a1ec-5426bf9283b5</Uuid>
+		<Uuid>64dceb5b-de05-47c7-8e40-e9b293e80d75</Uuid>
+		<Uuid>8d51c652-6aee-4de8-ba03-47b289a13ec5</Uuid>
+		<Uuid>51d7b5ce-5664-4750-b1a0-fabcdc31e49a</Uuid>
+		<Uuid>6522e3af-aa9e-421c-b667-e11db73cd8ca</Uuid>
+		<Uuid>9ac073a0-7abf-4dff-826f-9c44d4780590</Uuid>
+		<Uuid>2da9c21c-adc7-405a-a36e-46fbd9dfcd42</Uuid>
+		<Uuid>fe4d1053-9c84-4221-bac7-cb489a7064ff</Uuid>
+		<Uuid>1f005f88-e6d7-4bdc-81fa-3acf4c89cf64</Uuid>
+		<Uuid>42dc5a7c-d7b1-4653-92b9-9359b46cc2d4</Uuid>
+		<Uuid>e25721a9-34f9-479c-a4c3-31f5ec9e117d</Uuid>
+		<Uuid>506d1de3-06df-4131-9e88-e43f1768e3d8</Uuid>
+		<Uuid>e6625695-25a2-43d0-9056-1e9a1a594b1e</Uuid>
+		<Uuid>91990287-4edf-4e38-aa6c-66d0e906807b</Uuid>
+		<Uuid>2216cdd0-177c-5678-9e88-dd8b95312234</Uuid>
+		<Uuid>1737c8c6-b526-4dd8-589e-ee4e205b06f4</Uuid>
+		<Uuid>6a43bef6-8b70-4253-a828-82c3ab399655</Uuid>
+		<Uuid>0a27038a-0f3a-48bb-b235-4a44066a1402</Uuid>
+		<Uuid>0a9ec2c3-5e18-4c0a-a183-fd86d9d9a08b</Uuid>
+		<Uuid>2216cdd0-177c-5678-9e88-dd8b95313334</Uuid>
+	</ConvertersApplied>
+</AnyLogicWorkspace>
