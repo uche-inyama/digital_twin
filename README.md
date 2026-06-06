@@ -8,7 +8,8 @@
 
 ### 3. Set your Anthropic API Key
 #### Windows:
-- set ANTHROPIC_API_KEY="your-api-key-here"
+- create a .env file at the root of the project folder
+- copy and paste into .env file: ```set ANTHROPIC_API_KEY="your-api-key-here" ```
 
 ### 4. Running the simulation
 1. DigitalTwin folder -> open DigitalTwin.alpx in AnyLogic;
