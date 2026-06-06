@@ -31,6 +31,6 @@
 | A5 LLM+RL+HITL   | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### 6. Run the simulation
-- click ▶️ on AnyLogic application to run simulation
+- click ▶️ on AnyLogic to run simulation
 
 ### 7. My results
