@@ -40,6 +40,7 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 | A5 LLM+RL+HITL   | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 #### 6. Run the simulation
+Caveat: Create a results folder at the root of the project directory.
 - click ▶️ on AnyLogic to run the simulation
 
 #### 7. My results
@@ -58,7 +59,9 @@ We would proceed to run main.py ```**demand scenario**```, which would restart t
 #### Testing the RL_Policy
 To test the policy:
 -  configure main with the parameters for the simulation expected. Start the simulation and pause it.
--  cd rl_anyLogic/training and run **trained.py 0**. Like before, change the value: 0 -> 1 -> 2.
+-  cd rl_anyLogic/training and run **trained.py 0**. Like before, change the value: 0 -> 1 -> 2. AnyLogic would restart the simulation.
 
-
--  
+Getting your results:
+At the end of all the simulations
+- Move import_results.py to the results folder.
+- cd into results and run import_results.py. 
