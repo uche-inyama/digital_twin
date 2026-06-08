@@ -25,8 +25,11 @@ FYI: The values of ``` Demand Scenario ``` are crucial, because a function in An
 
 #### 5. Enabling checkboxes in the main
 
-Inside the DigitalTwin project on AnyLogic, on the left side of the window, click on main, then choose Manufacturer, Distributor, and Retailer one after the other - instances of the supplyNode.
-When you select one of the supplyNode instances, a properties panel will open on the right side of the window, and you will see the parameters defined as column headings in the table below. Check the boxes accordingly using the table below, depending on the ***condition*** you want to simulate.
+IIn the DigitalTwin project in AnyLogic, locate the project tree on the left side of the window and click Main. Then select Manufacturer, Distributor, and Retailer in turn (these are instances of the supplyNode agent).
+
+When you select a supplyNode instance, its Properties panel will appear on the right side of the window. The parameters available for configuration are listed as the column headings in the table below.
+
+To configure a simulation scenario, tick the appropriate checkboxes for each supplyNode instance according to the *condition* you want to simulate, using the table below as a guide
 
 | Condition        | Agent Enabled | Info Sharing | LLM | RL | HITL |
 |------------------|--------------|--------------|-----|----|------|
