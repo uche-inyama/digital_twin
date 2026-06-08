@@ -47,7 +47,7 @@ Caveat: Create a results folder at the root of the project directory.
 #### 7. My results
 - It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet.
 
-#### Reinforcement Learning.
+#### 7. Reinforcement Learning.
 To train the reinforcement learning algorithm used for the RL implementation:
 - Start the anyLogic simulation with parameters configured to your expectations, then pause it.
 - cd into rl_anyLogic folder and run ``` main.py 0 ```. This would restart the simulation in anyLogic.
@@ -57,12 +57,12 @@ For example, assuming training is being done for demand scenario 0 under baselin
 The configuration for a baseline autonomy would be set and the demand scenario also set to 0 on anyLogic. **Then anyLogic would be started and paused.**
 We would proceed to run main.py ```**demand scenario**```, which would restart the simulation on anyLogic.
 
-#### Testing the RL_Policy
+#### 8. Testing the RL_Policy
 To test the policy:
 -  configure main with the parameters for the simulation expected. Start the simulation and pause it.
 -  cd rl_anyLogic/training and run **trained.py 0**. Like before, change the value: 0 -> 1 -> 2. AnyLogic would restart the simulation.
 
-Getting your results:
+#### 9. Getting your results:
 At the end of all the simulations
 - Move import_results.py to the results folder.
 - cd into results and run import_results.py. 
