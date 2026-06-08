@@ -25,6 +25,10 @@ FYI: The values of ``` Demand Scenario ``` are crucial, because a function in An
 
 #### 5. Enabling checkboxes in the main
 
+Inside the DigitalTwin project on AnyLogic, on the left side of the window, click on main, then click on Manufacturer, Distributor, and Retailer - instances of the supplyNode.
+On the right side of the window. A properties panel will open, and you will see the parameters defined as column headings in the table below. Check the boxes accordingly
+using the table below.
+
 | Condition        | Agent Enabled | Info Sharing | LLM | RL | HITL |
 |------------------|--------------|--------------|-----|----|------|
 | A0 Baseline      | ❌ | ❌ | ❌ | ❌ | ❌ |
