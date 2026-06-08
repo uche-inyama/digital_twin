@@ -44,3 +44,21 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 
 #### 7. My results
 - It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet.
+
+#### Reinforcement Learning.
+To train the reinforcement learning algorithm used for the RL implementation:
+- Start the anyLogic simulation with parameters configured to your expectations, then pause it.
+- cd into rl_anyLogic folder and run ``` main.py 0 ```. This would restart the simulation in anyLogic.
+FYI, the value 0 after main.py represents the demand scenario and should be changed to 1 and 2 accordingly.
+
+For example, assuming training is being done for demand scenario 0 under baseline autonomy level. 
+The configuration for a baseline autonomy would be set and the demand scenario also set to 0 on anyLogic. **Then anyLogic would be started and paused.**
+We would proceed to run main.py ```**demand scenario**```, which would restart the simulation on anyLogic.
+
+#### Testing the RL_Policy
+To test the policy:
+-  configure main with the parameters for the simulation expected. Start the simulation and pause it.
+-  cd rl_anyLogic/training and run **trained.py 0**. Like before, change the value: 0 -> 1 -> 2.
+
+
+-  
