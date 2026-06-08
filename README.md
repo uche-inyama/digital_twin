@@ -41,7 +41,8 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 
 #### 6. Run the simulation
 Caveat: Create a results folder at the root of the project directory.
-- click ▶️ on AnyLogic to run the simulation
+- click ▶️ on AnyLogic to run the simulation.
+- For each complete run, the summary_results.csv will the updated and timeseries__.csv will also be added.
 
 #### 7. My results
 - It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet.
