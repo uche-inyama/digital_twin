@@ -25,7 +25,7 @@ FYI: The values of ``` Demand Scenario ``` are crucial, because a function in An
 
 #### 5. Enabling checkboxes in the main
 
-IIn the DigitalTwin project in AnyLogic, locate the project tree on the left side of the window and click Main. Then select Manufacturer, Distributor, and Retailer in turn (these are instances of the supplyNode agent).
+In the DigitalTwin project in AnyLogic, locate the project tree on the left side of the window and click Main. Then select Manufacturer, Distributor, and Retailer in turn (these are instances of the supplyNode agent).
 
 When you select a supplyNode instance, its Properties panel will appear on the right side of the window. The parameters available for configuration are listed as the column headings in the table below.
 
