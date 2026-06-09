@@ -54,7 +54,7 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 
 To train the reinforcement learning model used in the RL implementation:
 
-- Configure the simulation parameters in AnyLogic as required, then start and pause the simulation.
+- In AnyLogic, go to main; configure each instance of supplyNode parameters  based on the expected simulation outcome, then start and pause the simulation.
 - Navigate to the `rl_anyLogic` directory and run:
 
 ```bash
