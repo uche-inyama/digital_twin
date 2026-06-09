@@ -11,7 +11,7 @@
 - create a .env file at the root of the project folder
 - copy and paste into .env file: ```set ANTHROPIC_API_KEY="your-api-key-here" ```
 - Anthropic model: Claude Haiku 4.5
-  FYI: The api-key can be set at [Anthropic platform](https://platform.claude.com/)
+- FYI: The api-key can be set at [Anthropic platform](https://platform.claude.com/)
 
 #### 4. Running the simulation
 1. DigitalTwin folder -> open DigitalTwin.alpx in AnyLogic;
