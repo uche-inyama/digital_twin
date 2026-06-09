@@ -47,7 +47,7 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 
 - Click ▶️ in AnyLogic to start the simulation.
 - After each completed run:
-  - `summary_results.csv` will be updated.
+  - `summary_results.csv` will be updated in the `results` folder.
   - A new `timeseries__.csv` file will be generated in the `results` folder.
 
 #### 7. Reinforcement Learning
