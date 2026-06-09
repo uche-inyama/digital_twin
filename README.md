@@ -10,6 +10,8 @@
 ##### Windows:
 - create a .env file at the root of the project folder
 - copy and paste into .env file: ```set ANTHROPIC_API_KEY="your-api-key-here" ```
+- Anthropic model: Claude Haiku 4.5
+  FYI: The api-key can be set at [Anthropic platform](https://platform.claude.com/)
 
 #### 4. Running the simulation
 1. DigitalTwin folder -> open DigitalTwin.alpx in AnyLogic;
@@ -39,30 +41,84 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 | A4 LLM+RL        | ✅ | ✅ | ✅ | ✅ | ❌ |
 | A5 LLM+RL+HITL   | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-#### 6. Run the simulation
-Caveat: Create a results folder at the root of the project directory.
-- click ▶️ on AnyLogic to run the simulation.
-- For each complete run, the summary_results.csv will the updated and timeseries__.csv will be added to the results folder.
+#### 6. Run the Simulation
 
-#### 7. Reinforcement Learning.
-To train the reinforcement learning algorithm used for the RL implementation:
-- Start the anyLogic simulation with parameters configured to your expectations, then pause it.
-- cd into rl_anyLogic folder and run ``` main.py 0 ```. This would restart the simulation in anyLogic.
-FYI, the value 0 after main.py represents the demand scenario and should be changed to 1 and 2 accordingly.
+> **Note:** Create a `results` folder in the root directory of the project before running the simulation.
 
-For example, assuming training is being done for **demand scenario 0** under baseline autonomy level. 
-The configuration for a baseline autonomy would be set and the demand scenario also set to 0 on anyLogic. **Then anyLogic would be started and paused.**
-We would proceed to run main.py ```**demand scenario**```, which would restart the simulation on anyLogic.
+- Click ▶️ in AnyLogic to start the simulation.
+- After each completed run:
+  - `summary_results.csv` will be updated.
+  - A new `timeseries__.csv` file will be generated in the `results` folder.
 
-#### 8. Testing the RL_Policy
-To test the policy:
--  configure main with the parameters for the simulation expected. Start the simulation and pause it.
--  cd rl_anyLogic/training and run **trained.py 0**. Like before, change the value: 0 -> 1 -> 2. AnyLogic would restart the simulation.
+#### 7. Reinforcement Learning
 
-#### 9. Getting your results:
-At the end of all the simulations
-- Move import_results.py to the results folder.
-- cd into results and run import_results.py.
+To train the reinforcement learning model used in the RL implementation:
 
-#### 10. Extras - The result of my experiment runs
-- It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet. 
+- Configure the simulation parameters in AnyLogic as required, then start and pause the simulation.
+- Navigate to the `rl_anyLogic` directory and run:
+
+```bash
+python main.py 0
+```
+
+- This command will restart the simulation in AnyLogic.
+
+> **Note:** The value after `main.py` represents the demand scenario:
+>
+> - `0` = Demand Scenario 0
+> - `1` = Demand Scenario 1
+> - `2` = Demand Scenario 2
+
+##### Example
+
+Suppose you want to train the RL model for **Demand Scenario 0** under the **Baseline Autonomy** configuration:
+
+1. Configure AnyLogic with:
+   - **Autonomy Level:** Baseline
+   - **Demand Scenario:** `0`
+2. Start the simulation and pause it.
+3. Run:
+
+```bash
+python main.py 0
+```
+
+4. The script will reconnect to AnyLogic and restart the simulation for training.
+
+#### 8. Testing the RL Policy
+
+To evaluate a trained policy:
+
+- Configure the desired simulation parameters in AnyLogic.
+- Start the simulation and pause it.
+- Navigate to `rl_anyLogic/training` and run:
+
+```bash
+python trained.py 0
+```
+
+- As with training, replace `0` with `1` or `2` to test the corresponding demand scenario.
+- The script will restart the simulation in AnyLogic and execute the trained policy.
+
+#### 9. Collecting Results
+
+After all simulation runs have been completed:
+
+- Move `import_results.py` into the `results` folder.
+- Navigate to the `results` directory and run:
+
+```bash
+python import_results.py
+```
+
+This script aggregates the simulation outputs into a consolidated results file.
+
+#### 10. Additional Resources – Experiment Results
+
+The results from our experiment runs are available in the project root directory:
+
+```text
+Sprint3_Results0.xlsx
+```
+
+- Focus on the **first worksheet ("Raw Data")**, which contains the complete set of collected simulation results.
