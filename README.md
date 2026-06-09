@@ -42,10 +42,7 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 #### 6. Run the simulation
 Caveat: Create a results folder at the root of the project directory.
 - click ▶️ on AnyLogic to run the simulation.
-- For each complete run, the summary_results.csv will the updated and timeseries__.csv will also be added.
-
-#### 7. My results
-- It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet.
+- For each complete run, the summary_results.csv will the updated and timeseries__.csv will be added to the results folder.
 
 #### 7. Reinforcement Learning.
 To train the reinforcement learning algorithm used for the RL implementation:
@@ -53,7 +50,7 @@ To train the reinforcement learning algorithm used for the RL implementation:
 - cd into rl_anyLogic folder and run ``` main.py 0 ```. This would restart the simulation in anyLogic.
 FYI, the value 0 after main.py represents the demand scenario and should be changed to 1 and 2 accordingly.
 
-For example, assuming training is being done for demand scenario 0 under baseline autonomy level. 
+For example, assuming training is being done for **demand scenario 0** under baseline autonomy level. 
 The configuration for a baseline autonomy would be set and the demand scenario also set to 0 on anyLogic. **Then anyLogic would be started and paused.**
 We would proceed to run main.py ```**demand scenario**```, which would restart the simulation on anyLogic.
 
@@ -65,4 +62,7 @@ To test the policy:
 #### 9. Getting your results:
 At the end of all the simulations
 - Move import_results.py to the results folder.
-- cd into results and run import_results.py. 
+- cd into results and run import_results.py.
+
+#### 10. Extras - The result of my experiment runs
+- It is at the root of the project folder: ```Sprint3_Results0.xlsx ```, focus on the first sheet - the raw data sheet. 
