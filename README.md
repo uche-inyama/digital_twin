@@ -115,7 +115,7 @@ This script aggregates the simulation outputs into a consolidated results file.
 
 #### 10. Additional Resources – Experiment Results
 
-The results from our experiment runs are available in the project root directory:
+The results from my experiment runs are available in the project root directory:
 
 ```text
 Sprint3_Results0.xlsx
