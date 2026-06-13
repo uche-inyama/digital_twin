@@ -44,7 +44,8 @@ To configure a simulation scenario, tick the appropriate checkboxes for each sup
 #### 6. Run the Simulation
 
 > **Note:** Create a `results` folder in the root directory of the project before running the simulation.
-> Then, in main, find the endofrun function, and change the **String folder = "C:/Users/okech/models/DigitalTwin/results/";** to match your folder path.
+> Then, in main, find the endOfRun function, and change the **String folder = "C:/Users/okech/models/DigitalTwin/results/";** to match your folder path.
+> Also, for each supplyNode instance - retailer, manufacturer, and distributor, change the agentScriptPath to match your file path.
 
 - Click ▶️ in AnyLogic to start the simulation.
 - After each completed run:
