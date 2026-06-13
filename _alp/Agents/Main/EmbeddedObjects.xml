@@ -51,9 +51,6 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
-				<Value Class="CodeValue">
-					<Code><![CDATA[true]]></Code>
-				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
@@ -152,9 +149,6 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
-				<Value Class="CodeValue">
-					<Code><![CDATA[true]]></Code>
-				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
@@ -250,9 +244,6 @@
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentEnabled]]></Name>
-				<Value Class="CodeValue">
-					<Code><![CDATA[true]]></Code>
-				</Value>
 			</Parameter>
 			<Parameter>
 				<Name><![CDATA[agentScriptPath]]></Name>
